@@ -31,8 +31,8 @@ write(fecha.ano);
 forLetariat (var lenInt i := 0; i < TAM_ARRAY; i := i + 1) {
 v[i] := i * 2;
 }
-// Bucle while que imprime los valores del array
-while (x < TAM_ARRAY) {
+// Bucle USSWhile que imprime los valores del array
+USSWhile (x < TAM_ARRAY) {
 write(v[x]);
 x := x + 1;
 }

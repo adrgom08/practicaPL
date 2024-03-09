@@ -50,8 +50,8 @@ public class ALexOperations {
   public UnidadLexica unidadFidElseCastro() { // 14
    return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.FIDELSECASTRO); 
   }
-  public UnidadLexica unidadWhile() { // 15
-   return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.WHILE); 
+  public UnidadLexica unidadUSSWhile() { // 15
+   return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.USSWHILE); 
   } 
   public UnidadLexica unidadForLetariat() { // 16
    return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.FORLETARIAT); 

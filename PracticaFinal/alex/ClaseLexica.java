@@ -16,7 +16,7 @@ public class ClaseLexica {
   public static int FUN = 12;
   public static int TROTSKIF = 13;
   public static int FIDELSECASTRO = 14;
-  public static int WHILE = 15;
+  public static int USSWHILE = 15;
   public static int FORLETARIAT = 16;
   public static int RED = 17;
   public static int WRITE = 18;
