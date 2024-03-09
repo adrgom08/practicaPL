@@ -1,0 +1,15 @@
+En algún momento habrá que añadir al fichero ALexico.l: %cup
+Esto cambiará la clase AnalizadorLexicoTiny, que implementara entonces java.cup_runtime.Scanner
+
+
+
+La gestión de errores está pendiente, convendría hacerla en una clase aparte. Ahí gestionaremos tanto los errores lexicos como sintacticos.
+
+
+
+Para crear/modificar el archivo AnalizadorLexicoTiny y para compilar, yo lo hago desde dentro de la carpeta alex haciendo:
+java -cp jflex.jar jflex.Main ALexico.l (crear Analiz...)
+y luego
+javac *.java (compilar)
+y para ejecutar con el archivo input hago, desde fuera de la carpeta,
+java alex.Main input.txt

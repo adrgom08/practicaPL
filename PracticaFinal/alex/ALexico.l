@@ -1,7 +1,6 @@
 package alex;
 
 %%
-%cup
 %char
 %line
 %column
@@ -39,8 +38,6 @@ punteroNulo = null
 claveVar = var
 claveConst = const
 
-identificador = {letra}({letra}|{digito})*
-
 claveInt = lenInt
 claveBool = boolShevik
 clavePointer = pointer
@@ -61,6 +58,8 @@ claveCall = call
 claveNew = new                  
 claveDelete = delete  
 
+identificador = {letra}({letra}|{digito}|\_)*
+
 operadorMas = \+        
 operadorMenos = \-         
 operadorAsterisco = \*      
@@ -80,7 +79,7 @@ operadorNeg = \!
 operadorRef = \#
 operadorPunto = \.
 operadorFlecha = \->
-operadorCAbre \[
+operadorCAbre = \[
 operadorCCierra = \]        
 
 parentesisAbre = \(
@@ -101,13 +100,11 @@ coma = \,
 
  
 {enteroPositivo}            {return ops.unidadEntPositivo();}  
-{booleano}                  {return ops.unidadBool();}
+{bool}                      {return ops.unidadBool();}
 {punteroNulo}               {return ops.unidadNull();}
 
 {claveVar}                  {return ops.unidadVar();} 
 {claveConst}                {return ops.unidadConst();} 
-
-{identificador}             {return ops.unidadIden();}
 
 {claveInt}                  {return ops.unidadLenInt();} 
 {claveBool}                 {return ops.unidadBoolShevik();} 
@@ -128,6 +125,8 @@ coma = \,
 {claveCall}                 {return ops.unidadCall();} 
 {claveNew}                  {return ops.unidadNew();} 
 {claveDelete}               {return ops.unidadDelete();} 
+
+{identificador}             {return ops.unidadIden();}
 
 {operadorMas}               {return ops.unidadMas();}
 {operadorMenos}             {return ops.unidadMenos();}
