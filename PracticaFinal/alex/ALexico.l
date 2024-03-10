@@ -118,7 +118,7 @@ coma = \,
 {claveReturn}               {return ops.unidadReturn();}
 {claveIf}                   {return ops.unidadTrotskIf();} 
 {claveElse}                 {return ops.unidadFidElseCastro();} 
-{claveWhile}                {return ops.unidadWhile();} 
+{claveWhile}                {return ops.unidadUSSWhile();} 
 {claveFor}                  {return ops.unidadForLetariat();} 
 {claveRead}                 {return ops.unidadRed();} 
 {claveWrite}                {return ops.unidadWrite();} 
