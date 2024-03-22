@@ -1,4 +1,4 @@
-package alex;
+package asint;
 
 public class ClaseLexica {
   public static int EOF = 0;
