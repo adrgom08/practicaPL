@@ -3,7 +3,7 @@ package asint;
 import java_cup.runtime.*;
 import alex.AnalizadorLexicoTiny;
 import alex.UnidadLexica;
-import errors.GestionErroresTiny;
+// import errors.GestionErroresTiny;
 
 scan with {: return getScanner().next_token(); :};
 parser code {: 
@@ -19,10 +19,16 @@ init with {:
 :};
 
 
-terminal     DONDE, EVALUA, IDEN, ENT, REAL, MAS,
-             MENOS, POR, DIV, IGUAL, COMA, PAP, PCIERRE;
+terminal   VAR, BOOL, ENTPOS, GUEVARRAY, POINTER, STALINTRUCT, MAIN, LENINT,
+            BOOLSHEVIK, NULL, FUN, TROTSKIF, FIDELSECASTRO, USSWHILE, FORLETARIAT, RED,
+            WRITE, CALL, NEW, DELETE, CONST, IDEN, MAS, MENOS, ASTERISCO, DIV, RESTO, IGUAL,
+            MENORIGUAL, MAYORIGUAL, MENOR, MAYOR, AND, OR, NEG, REF, CABRE, CCIERRA, PUNTO,
+            FLECHA, PABRE, PCIERRA, LLABRE, LLCIERRA, PUNTOYCOMA, ASIGNACION, RETURN, COMA,
+            DISTINTO
 
-non terminal  S, Ds, LDs, D, E0, E1, E2, OP0, OP1;
+non terminal  programa, bloque, Ex0, Ex1, Ex2, Ex3, lista, declaracion
+
+
 
 S   ::= EVALUA E0 Ds ;
 Ds  ::= DONDE LDs | ;
