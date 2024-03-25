@@ -1,0 +1,8 @@
+Construir el analizador sintactico: 
+Ejecutar desde la carpeta asint: java -cp cup.jar java_cup.Main -parser AnalizadorSintacticoTiny -symbols ClaseLexica -nopositions ASintactico.cup
+
+Compilar el analizador sintactico:
+Ejecutar desde PracticaFinal: javac -cp "cup.jar" */*.java
+
+Probar el codigo sobre el fichero input.txt:
+java -cp ".:../cup.jar" asint.Main input.txt 

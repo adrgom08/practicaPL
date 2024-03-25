@@ -1,13 +1,1 @@
-5 + 3
-true || false
-true && true
-!true
-x[3+2] - 4
-*y != null
-7 + (4 + 3) / 2
-7 + (-3)
-7 - 2 < 10
-fecha.dia + fecha->mes * 10 
-resul = suma(3, 6 + 9)
-n = red lenInt
-*p = new lenInt
+new lennt

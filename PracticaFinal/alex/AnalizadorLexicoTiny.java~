@@ -5,7 +5,6 @@
 package alex;
 
 import errors.GestionErroresTiny;
-import java_cup.runtime.*;
 
 
 // See https://github.com/jflex-de/jflex/issues/222
