@@ -1,48 +1,13 @@
-// Declaración de tipos de datos
-stalinTruct tFecha {
-var lenInt dia;
-var lenInt mes;
-var lenInt ano;
-}
-// Declaración de variables
-var lenInt x := 3;
-var boolShevik b := true;
-var guevArray lenInt v[TAM_ARRAY];
-var pointer lenInt p := #x; // Puntero a la variable x
-var tFecha fecha := {1, 1, 2024};
-// Declaración de funciones
-fun lenInt suma(lenInt a, lenInt b) {
-return a + b;
-}
-fun lenInt max(lenInt a, lenInt b) {
-// Ejemplo de trotskIf
-trotskIf (a > b) {
-return a;
-} fidElseCastro {
-return b;
-}
-}
-fun void imprimirFecha(tFecha #fecha) {
-write (fecha.dia);
-write(fecha.mes);
-write(fecha.ano);
-}
-// Asignación de valores al array
-forLetariat (var lenInt i := 0; i < TAM_ARRAY; i := i + 1) {
-v[i] := i * 2;
-}
-// Bucle USSWhile que imprime los valores del array
-USSWhile (x < TAM_ARRAY) {
-write(v[x]);
-x := x + 1;
-}
-// Llamada a la función suma e impresión del resultado
-var lenInt resultado := suma(x, 5);
-write(resultado);
-// Modificación del valor de la variable a través del puntero
-*p := 10;
-// Impresión de la fecha actual
-call imprimirFecha(fecha);
-// Liberación de memoria del array
-delete v;
-// Fin del programa
+5 + 3
+true || false
+true && true
+!true
+x[3+2] - 4
+*y != null
+7 + (4 + 3) / 2
+7 + (-3)
+7 - 2 < 10
+fecha.dia + fecha->mes * 10 
+resul = suma(3, 6 + 9)
+n = red lenInt
+*p = new lenInt

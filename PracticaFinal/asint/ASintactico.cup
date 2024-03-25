@@ -24,20 +24,64 @@ terminal   VAR, BOOL, ENTPOS, GUEVARRAY, POINTER, STALINTRUCT, MAIN, LENINT,
             WRITE, CALL, NEW, DELETE, CONST, IDEN, MAS, MENOS, ASTERISCO, DIV, RESTO, IGUAL,
             MENORIGUAL, MAYORIGUAL, MENOR, MAYOR, AND, OR, NEG, REF, CABRE, CCIERRA, PUNTO,
             FLECHA, PABRE, PCIERRA, LLABRE, LLCIERRA, PUNTOYCOMA, ASIGNACION, RETURN, COMA,
-            DISTINTO
+            DISTINTO;
 
-non terminal  programa, bloque, Ex0, Ex1, Ex2, Ex3, lista, declaracion
+non terminal  Expr, E0, E1, E2, E3, E4, E5, E6, E7, E8;
+non terminal Lista_Param, Param;
 
 
+// Expresiones 
+Expr ::= E0 ;
+E0 ::= E0 OR E1 ;
+E0 ::= E1 ;
 
-S   ::= EVALUA E0 Ds ;
-Ds  ::= DONDE LDs | ;
-LDs ::= LDs COMA D | D ;
-D   ::= IDEN IGUAL E0 ;
-E0  ::= E0 OP0 E1  | E1 ;
-E1  ::= E1 OP1 E2  | E2 ;
-E2  ::= ENT  | REAL  | IDEN  | PAP E0 PCIERRE ;  
-OP0 ::= MAS  | MENOS ;
-OP1 ::= POR | DIV ;
+E1 ::= E1 AND E2 ;
+E1 ::= E2 ;
+
+E2 ::= E2 IGUAL E3 ;
+E2 ::= E2 DISTINTO E3 ;
+E2 ::= E2 MENORIGUAL E3 ;
+E2 ::= E2 MAYORIGUAL E3 ;
+E2 ::= E2 MENOR E3 ;
+E2 ::= E2 MAYOR E3 ;
+E2 ::= E3 ;
+
+E3 ::= E3 MAS E4 ;
+E3 ::= E3 MENOS E4 ;
+E3 ::= E4 ;
+
+E4 ::= E4 ASTERISCO E5 ;
+E4 ::= E4 DIV E5 ;
+E4 ::= E4 RESTO E5 ;
+E4 ::= E5 ;
+
+E5 ::= MAS E6 ;
+E5 ::= MENOS E6 ;
+E5 ::= ASTERISCO E6 ;
+E5 ::= NEG E6 ;
+E5 ::= REF E6 ;
+E5 ::= E6 ;
+
+E6 ::= NEW LENINT ;
+E6 ::= NEW BOOLSHEVIK ;
+E6 ::= RED LENINT ;
+E6 ::= RED BOOLSHEVIK ;
+E6 ::= E7;
+
+E7 ::= E7 CABRE Expr CCIERRA ;
+E7 ::= E7 PUNTO IDEN ;
+E7 ::= E7 FLECHA IDEN ;
+E7 ::= E7 PABRE Lista_Param PCIERRA ;
+Lista_Param ::= Param;
+Lista_Param ::= ;
+Param ::= Param COMA Expr ;
+Param ::= Expr ;
+E7 ::= E8 ; 
+
+E8 ::= ENTPOS ;
+E8 ::= BOOL ;
+E8 ::= NULL ;
+E8 ::= IDEN ;
+E8 ::= PABRE Expr PCIERRA ;
 
 
