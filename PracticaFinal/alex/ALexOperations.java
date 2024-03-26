@@ -160,4 +160,7 @@ public class ALexOperations {
   public UnidadLexica unidadDistinto() { // 50
    return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.DISTINTO);
   }
+  public UnidadLexica unidadType() { // 51
+   return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.TYPE);
+  }
 }

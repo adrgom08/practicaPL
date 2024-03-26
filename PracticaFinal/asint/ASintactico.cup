@@ -20,18 +20,47 @@ init with {:
 
 
 terminal   VAR, BOOL, ENTPOS, GUEVARRAY, POINTER, STALINTRUCT, MAIN, LENINT,
-            BOOLSHEVIK, NULL, FUN, TROTSKIF, FIDELSECASTRO, USSWHILE, FORLETARIAT, RED,
-            WRITE, CALL, NEW, DELETE, CONST, IDEN, MAS, MENOS, ASTERISCO, DIV, RESTO, IGUAL,
-            MENORIGUAL, MAYORIGUAL, MENOR, MAYOR, AND, OR, NEG, REF, CABRE, CCIERRA, PUNTO,
-            FLECHA, PABRE, PCIERRA, LLABRE, LLCIERRA, PUNTOYCOMA, ASIGNACION, RETURN, COMA,
-            DISTINTO;
+               BOOLSHEVIK, NULL, FUN, TROTSKIF, FIDELSECASTRO, USSWHILE, FORLETARIAT, RED,
+               WRITE, CALL, NEW, DELETE, CONST, IDEN, MAS, MENOS, ASTERISCO, DIV, RESTO, IGUAL,
+               MENORIGUAL, MAYORIGUAL, MENOR, MAYOR, AND, OR, NEG, REF, CABRE, CCIERRA, PUNTO,
+               FLECHA, PABRE, PCIERRA, LLABRE, LLCIERRA, PUNTOYCOMA, ASIGNACION, RETURN, COMA,
+               DISTINTO, TYPE;
 
-non terminal  Expr, E0, E1, E2, E3, E4, E5, E6, E7, E8;
-non terminal Lista_Param, Param;
+non terminal  Programa, Lista_Instrucciones, Instruccion, InsAsig, InsIf, InsIfElse, InsWhile, InsFor, InsWrite, 
+                InsDelete, InsCall, Expr, E0, E1, E2, E3, E4, E5, E6, E7, E8,
+                Lista_Param, Param, Bloque;
 
+Programa ::= Instruccion ;
+
+// Instrucciones
+Instruccion ::= InsAsig ;
+Instruccion ::= InsIf ;
+Instruccion ::= InsIfElse ;
+Instruccion ::= InsWhile ;
+Instruccion ::= InsFor ;
+Instruccion ::= InsWrite ;
+Instruccion ::= InsDelete ;
+Instruccion ::= InsCall ;
+
+InsAsig ::= Expr ASIGNACION Expr PUNTOYCOMA ;
+InsIf ::= TROTSKIF PABRE Expr PCIERRA Bloque ;
+InsIfElse ::= TROTSKIF PABRE Expr PCIERRA Bloque FIDELSECASTRO Bloque ;
+InsWhile ::= USSWHILE PABRE Expr PCIERRA Bloque ;
+InsFor ::= FORLETARIAT Bloque ;
+InsWrite ::= WRITE Expr PUNTOYCOMA;
+InsDelete ::= DELETE Expr PUNTOYCOMA;
+InsCall ::= CALL IDEN PABRE Lista_Param PCIERRA PUNTOYCOMA;
+
+Bloque ::= LLABRE LLCIERRA;
+
+Lista_Param ::= Param;
+Lista_Param ::= ;
+Param ::= Param COMA Expr ;
+Param ::= Expr ;
 
 // Expresiones 
 Expr ::= E0 ;
+
 E0 ::= E0 OR E1 ;
 E0 ::= E1 ;
 
@@ -71,11 +100,7 @@ E6 ::= E7;
 E7 ::= E7 CABRE Expr CCIERRA ;
 E7 ::= E7 PUNTO IDEN ;
 E7 ::= E7 FLECHA IDEN ;
-E7 ::= E7 PABRE Lista_Param PCIERRA ;
-Lista_Param ::= Param;
-Lista_Param ::= ;
-Param ::= Param COMA Expr ;
-Param ::= Expr ;
+E7 ::= IDEN PABRE Lista_Param PCIERRA ;
 E7 ::= E8 ; 
 
 E8 ::= ENTPOS ;

@@ -14,10 +14,4 @@ public class UnidadLexica extends Symbol {
     public int fila() {return ((TokenValue)value).fila;}
     public int columna() {return ((TokenValue)value).columna;}
     public String toString() {
-	if (lexema() == null) { // Esto seguramente habrá que eliminarlo en un futuro
-	    return "[clase:"+clase()+",fila:"+fila()+",col:"+columna()+"]";
-	} else {
-	    return "[clase:"+clase()+",fila:"+fila()+",col:"+columna()+",lexema:"+lexema()+"]";
-	}
-    }
 }

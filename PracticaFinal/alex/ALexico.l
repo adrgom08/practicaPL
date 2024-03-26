@@ -44,6 +44,7 @@ punteroNulo = null
 
 claveVar = var
 claveConst = const
+claveType = type
 
 claveInt = lenInt
 claveBool = boolShevik
@@ -112,6 +113,7 @@ coma = \,
 
 {claveVar}                  {return ops.unidadVar();} 
 {claveConst}                {return ops.unidadConst();} 
+{claveType}                 {return ops.unidadType();}
 
 {claveInt}                  {return ops.unidadLenInt();} 
 {claveBool}                 {return ops.unidadBoolShevik();} 
