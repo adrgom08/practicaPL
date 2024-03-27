@@ -13,5 +13,4 @@ public class UnidadLexica extends Symbol {
     public String lexema() {return ((TokenValue)value).lexema;}    
     public int fila() {return ((TokenValue)value).fila;}
     public int columna() {return ((TokenValue)value).columna;}
-    public String toString() {
 }
