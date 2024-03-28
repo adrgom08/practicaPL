@@ -3,6 +3,7 @@ package asint;
 import java_cup.runtime.*;
 import alex.AnalizadorLexicoTiny;
 import alex.UnidadLexica;
+import alex.TokenValue;
 import errors.GestionErroresTiny;
 
 scan with {: return getScanner().next_token(); :};
@@ -19,12 +20,12 @@ init with {:
 :};
 
 
-terminal   VAR, BOOL, ENTPOS, GUEVARRAY, POINTER, STALINTRUCT, MAIN, LENINT,
-               BOOLSHEVIK, NULL, FUN, TROTSKIF, FIDELSECASTRO, USSWHILE, FORLETARIAT, RED,
-               WRITE, CALL, NEW, DELETE, CONST, IDEN, MAS, MENOS, ASTERISCO, DIV, RESTO, IGUAL,
-               MENORIGUAL, MAYORIGUAL, MENOR, MAYOR, AND, OR, NEG, REF, CABRE, CCIERRA, PUNTO,
-               FLECHA, PABRE, PCIERRA, LLABRE, LLCIERRA, PUNTOYCOMA, ASIGNACION, RETURN, COMA,
-               DISTINTO, TYPE, VOID;
+terminal  TokenValue VAR, BOOL, ENTPOS, GUEVARRAY, POINTER, STALINTRUCT, MAIN, LENINT,
+                      BOOLSHEVIK, NULL, FUN, TROTSKIF, FIDELSECASTRO, USSWHILE, FORLETARIAT, RED,
+                      WRITE, CALL, NEW, DELETE, CONST, IDEN, MAS, MENOS, ASTERISCO, DIV, RESTO, IGUAL,
+                      MENORIGUAL, MAYORIGUAL, MENOR, MAYOR, AND, OR, NEG, REF, CABRE, CCIERRA, PUNTO,
+                      FLECHA, PABRE, PCIERRA, LLABRE, LLCIERRA, PUNTOYCOMA, ASIGNACION, RETURN, COMA,
+                      DISTINTO, TYPE, VOID;
 
 non terminal  Programa, Lista_Instrucciones_Vac, Lista_Instrucciones, Instruccion, 
                 InsAsig, InsIf, InsIfElse, InsWhile, InsFor, InsWrite, 
@@ -37,6 +38,9 @@ non terminal  Programa, Lista_Instrucciones_Vac, Lista_Instrucciones, Instruccio
 Programa ::= Declaraciones_Ini_Vac Main ;
 
 Main ::= MAIN LLABRE Bloque LLCIERRA ;
+Main ::= MAIN error LLCIERRA:l
+{: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Declaracion de main incorrecta."); :};
+
 
 Bloque ::= Lista_Declaraciones_Vac Lista_Instrucciones_Vac ;
 
@@ -66,9 +70,13 @@ Declaracion ::= Dec_Var ;
 
 // Declaracion de Tipos 
 Dec_Tipo ::= TYPE IDEN ASIGNACION T0 PUNTOYCOMA ;
+Dec_Tipo ::= TYPE error PUNTOYCOMA:p 
+{: System.out.println("FILA " + p.fila + ", COLUMNA " + p.columna + ": Declaracion de tipo incorrecta."); :};
 
 // Declaracion de Structs
 Dec_Struct ::= STALINTRUCT IDEN LLABRE CuerpoStruct LLCIERRA ;
+Dec_Struct ::= STALINTRUCT error LLCIERRA:l
+{: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Declaracion de struct incorrecta."); :};
 CuerpoStruct ::= Lista_Declaraciones_Vac ;
 
 // Tipos 
@@ -84,16 +92,21 @@ T2 ::= BOOLSHEVIK ;
 // Declaracion de variables
 Dec_Var ::= Dec_Var_Vacia ;
 Dec_Var ::= Dec_Var_Ini ;
+Dec_Var ::= VAR error PUNTOYCOMA:p
+{: System.out.println("FILA " + p.fila + ", COLUMNA " + p.columna + ": Declaracion de variable incorrecta."); :};
 Dec_Var_Vacia ::= VAR T0 IDEN PUNTOYCOMA ;
 Dec_Var_Ini ::= VAR T0 IDEN ASIGNACION Expr PUNTOYCOMA ;
 Dec_Var_Ini ::= VAR CONST T0 IDEN ASIGNACION Expr PUNTOYCOMA ;
 
 // Declaracion de funciones tipo void
 Dec_Void ::= FUN VOID IDEN PABRE Lista_Argumentos_Vac PCIERRA LLABRE Bloque LLCIERRA ;
+Dec_Void ::= FUN VOID error LLCIERRA:l
+{: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Declaracion de funcion incorrecta."); :};
 
 // Declaracion de funciones 
 Dec_Fun ::= FUN T0 IDEN PABRE Lista_Argumentos_Vac PCIERRA LLABRE Bloque RETURN Expr PUNTOYCOMA LLCIERRA ;
-
+Dec_Fun ::= FUN error LLCIERRA:l 
+{: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Declaracion de funcion incorrecta."); :};
 
 Lista_Argumentos_Vac ::= Lista_Argumentos ;
 Lista_Argumentos_Vac ::= ;
@@ -116,11 +129,19 @@ Instruccion ::= InsCall ;
 InsAsig ::= Expr ASIGNACION Expr PUNTOYCOMA ;
 InsIf ::= TROTSKIF PABRE Expr PCIERRA LLABRE Bloque LLCIERRA ;
 InsIfElse ::= TROTSKIF PABRE Expr PCIERRA LLABRE Bloque LLCIERRA FIDELSECASTRO LLABRE Bloque LLCIERRA ;
+InsIfElse ::= TROTSKIF error LLCIERRA:l
+{: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Instruccion condicional incorrecta."); :};
 InsWhile ::= USSWHILE PABRE Expr PCIERRA LLABRE Bloque LLCIERRA ;
+InsWhile ::= USSWHILE error LLCIERRA:l 
+{: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Instruccion USSWhile incorrecta."); :};
 InsFor ::= FORLETARIAT PABRE Dec_Var_Ini Expr PUNTOYCOMA InsAsig PCIERRA LLABRE Bloque LLCIERRA ;
+InsFor ::= FORLETARIAT error LLCIERRA:l 
+{: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Instruccion forLetariat incorrecta."); :};
 InsWrite ::= WRITE PABRE Expr PCIERRA PUNTOYCOMA ;
 InsDelete ::= DELETE Expr PUNTOYCOMA ;
 InsCall ::= CALL IDEN PABRE Lista_Param_Vac PCIERRA PUNTOYCOMA ;
+InsCall ::= CALL error PUNTOYCOMA:p
+{: System.out.println("FILA " + p.fila + ", COLUMNA " + p.columna + ": Llamada a funcion incorrecta."); :};
 
 // Parametros al llamar una funcion
 Lista_Param_Vac ::= Lista_Param;

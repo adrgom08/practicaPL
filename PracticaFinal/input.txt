@@ -1,4 +1,5 @@
 var const lenInt c := 3;
+type booleano := boolShevik;
 fun lenInt suma(lenInt x, lenInt # y) {
 	var lenInt z := x + y;
 	return z;
@@ -15,12 +16,11 @@ fun void escribe(lenInt x)  {
 main {
 	var lenInt x := 1;
 	var lenInt y;
-	var boolShevik b := true;
+	var booleano b := true;
 	y := 1;
 	forLetariat (var lenInt i := 0; i < 5; i := i + 1;) {
 		call escribe(suma(x * y, tReserva.actividad[3 + c]));
 	}
-	
-	trotskIf (b) {}
+	trotskIf (x > 6) {}
 	fidElseCastro {}
 }
