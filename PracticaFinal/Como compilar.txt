@@ -1,4 +1,7 @@
-Construir el analizador sintactico: 
+Construir el analizador lexico (siempre que se cambie algo del .l):
+Ejecutar desde la carpeta alex: java -cp jflex.jar jflex.Main ALexico.l
+
+Construir el analizador sintactico (siempre que se cambie algo del .cup): 
 Ejecutar desde la carpeta asint: java -cp cup.jar java_cup.Main -parser AnalizadorSintacticoTiny -symbols ClaseLexica -nopositions ASintactico.cup
 
 Compilar el analizador sintactico:

@@ -54,7 +54,8 @@ claveStruct = stalinTruct
 
 claveMain = main
 
-claveFun = fun        
+claveFun = fun   
+claveVoid = void     
 claveReturn = return         
 claveIf = trotskIf                
 claveElse = fidElseCastro               
@@ -124,6 +125,7 @@ coma = \,
 {claveMain}                 {return ops.unidadMain();}  
 
 {claveFun}                  {return ops.unidadFun();}
+{claveVoid}                 {return ops.unidadVoid();}
 {claveReturn}               {return ops.unidadReturn();}
 {claveIf}                   {return ops.unidadTrotskIf();} 
 {claveElse}                 {return ops.unidadFidElseCastro();} 

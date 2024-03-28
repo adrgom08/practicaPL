@@ -24,13 +24,84 @@ terminal   VAR, BOOL, ENTPOS, GUEVARRAY, POINTER, STALINTRUCT, MAIN, LENINT,
                WRITE, CALL, NEW, DELETE, CONST, IDEN, MAS, MENOS, ASTERISCO, DIV, RESTO, IGUAL,
                MENORIGUAL, MAYORIGUAL, MENOR, MAYOR, AND, OR, NEG, REF, CABRE, CCIERRA, PUNTO,
                FLECHA, PABRE, PCIERRA, LLABRE, LLCIERRA, PUNTOYCOMA, ASIGNACION, RETURN, COMA,
-               DISTINTO, TYPE;
+               DISTINTO, TYPE, VOID;
 
-non terminal  Programa, Lista_Instrucciones, Instruccion, InsAsig, InsIf, InsIfElse, InsWhile, InsFor, InsWrite, 
+non terminal  Programa, Lista_Instrucciones_Vac, Lista_Instrucciones, Instruccion, 
+                InsAsig, InsIf, InsIfElse, InsWhile, InsFor, InsWrite, 
                 InsDelete, InsCall, Expr, E0, E1, E2, E3, E4, E5, E6, E7, E8,
-                Lista_Param, Param, Bloque;
+                Lista_Param_Vac, Lista_Param,  Bloque, T0, T1, T2, Dec_Var, Dec_Var_Vacia, Dec_Var_Ini,
+                Dec_Fun, Dec_Void, Lista_Argumentos_Vac, Lista_Argumentos, Argumento, Dec_Tipo, Dec_Struct,
+                CuerpoStruct, Lista_Declaraciones_Vac, Lista_Declaraciones, Declaracion, Declaraciones_Ini_Vac,
+                Declaraciones_Ini, Iniciales, Main;
 
-Programa ::= Instruccion ;
+Programa ::= Declaraciones_Ini_Vac Main ;
+
+Main ::= MAIN LLABRE Bloque LLCIERRA ;
+
+Bloque ::= Lista_Declaraciones_Vac Lista_Instrucciones_Vac ;
+
+Lista_Instrucciones_Vac ::= Lista_Instrucciones ;
+Lista_Instrucciones_Vac ::= ;
+Lista_Instrucciones ::= Lista_Instrucciones Instruccion ;
+Lista_Instrucciones ::= Instruccion ;
+
+Lista_Declaraciones_Vac ::= Lista_Declaraciones ;
+Lista_Declaraciones_Vac ::= ;
+Lista_Declaraciones ::= Lista_Declaraciones Declaracion ;
+Lista_Declaraciones ::= Declaracion ;
+
+// Delaraciones iniciales
+Declaraciones_Ini_Vac ::= Declaraciones_Ini ;
+Declaraciones_Ini_Vac ::= ;
+Declaraciones_Ini ::= Declaraciones_Ini Iniciales ;
+Declaraciones_Ini ::= Iniciales ;
+Iniciales ::= Dec_Fun ;
+Iniciales ::= Dec_Void ;
+Iniciales ::= Declaracion ;
+
+// Declaraciones en bloques 
+Declaracion ::= Dec_Tipo ;
+Declaracion ::= Dec_Struct ;
+Declaracion ::= Dec_Var ;
+
+// Declaracion de Tipos 
+Dec_Tipo ::= TYPE IDEN ASIGNACION T0 PUNTOYCOMA ;
+
+// Declaracion de Structs
+Dec_Struct ::= STALINTRUCT IDEN LLABRE CuerpoStruct LLCIERRA ;
+CuerpoStruct ::= Lista_Declaraciones_Vac ;
+
+// Tipos 
+T0 ::= POINTER T0 ;
+T0 ::= T1 ;
+T1 ::= GUEVARRAY T1 CABRE Expr CCIERRA ;
+T1 ::= PABRE T0 PCIERRA ;
+T1 ::= IDEN ;
+T1 ::= T2 ;
+T2 ::= LENINT ;
+T2 ::= BOOLSHEVIK ;
+
+// Declaracion de variables
+Dec_Var ::= Dec_Var_Vacia ;
+Dec_Var ::= Dec_Var_Ini ;
+Dec_Var_Vacia ::= VAR T0 IDEN PUNTOYCOMA ;
+Dec_Var_Ini ::= VAR T0 IDEN ASIGNACION Expr PUNTOYCOMA ;
+Dec_Var_Ini ::= VAR CONST T0 IDEN ASIGNACION Expr PUNTOYCOMA ;
+
+// Declaracion de funciones tipo void
+Dec_Void ::= FUN VOID IDEN PABRE Lista_Argumentos_Vac PCIERRA LLABRE Bloque LLCIERRA ;
+
+// Declaracion de funciones 
+Dec_Fun ::= FUN T0 IDEN PABRE Lista_Argumentos_Vac PCIERRA LLABRE Bloque RETURN Expr PUNTOYCOMA LLCIERRA ;
+
+
+Lista_Argumentos_Vac ::= Lista_Argumentos ;
+Lista_Argumentos_Vac ::= ;
+Lista_Argumentos ::= Lista_Argumentos COMA Argumento ;
+Lista_Argumentos ::= Argumento ;
+Argumento ::= T0 IDEN ;
+Argumento ::= T0 REF IDEN ;
+
 
 // Instrucciones
 Instruccion ::= InsAsig ;
@@ -43,20 +114,19 @@ Instruccion ::= InsDelete ;
 Instruccion ::= InsCall ;
 
 InsAsig ::= Expr ASIGNACION Expr PUNTOYCOMA ;
-InsIf ::= TROTSKIF PABRE Expr PCIERRA Bloque ;
-InsIfElse ::= TROTSKIF PABRE Expr PCIERRA Bloque FIDELSECASTRO Bloque ;
-InsWhile ::= USSWHILE PABRE Expr PCIERRA Bloque ;
-InsFor ::= FORLETARIAT Bloque ;
-InsWrite ::= WRITE Expr PUNTOYCOMA;
-InsDelete ::= DELETE Expr PUNTOYCOMA;
-InsCall ::= CALL IDEN PABRE Lista_Param PCIERRA PUNTOYCOMA;
+InsIf ::= TROTSKIF PABRE Expr PCIERRA LLABRE Bloque LLCIERRA ;
+InsIfElse ::= TROTSKIF PABRE Expr PCIERRA LLABRE Bloque LLCIERRA FIDELSECASTRO LLABRE Bloque LLCIERRA ;
+InsWhile ::= USSWHILE PABRE Expr PCIERRA LLABRE Bloque LLCIERRA ;
+InsFor ::= FORLETARIAT PABRE Dec_Var_Ini Expr PUNTOYCOMA InsAsig PCIERRA LLABRE Bloque LLCIERRA ;
+InsWrite ::= WRITE PABRE Expr PCIERRA PUNTOYCOMA ;
+InsDelete ::= DELETE Expr PUNTOYCOMA ;
+InsCall ::= CALL IDEN PABRE Lista_Param_Vac PCIERRA PUNTOYCOMA ;
 
-Bloque ::= LLABRE LLCIERRA;
-
-Lista_Param ::= Param;
-Lista_Param ::= ;
-Param ::= Param COMA Expr ;
-Param ::= Expr ;
+// Parametros al llamar una funcion
+Lista_Param_Vac ::= Lista_Param;
+Lista_Param_Vac ::= ;
+Lista_Param::= Lista_Param COMA Expr ;
+Lista_Param ::= Expr ;
 
 // Expresiones 
 Expr ::= E0 ;
@@ -100,7 +170,7 @@ E6 ::= E7;
 E7 ::= E7 CABRE Expr CCIERRA ;
 E7 ::= E7 PUNTO IDEN ;
 E7 ::= E7 FLECHA IDEN ;
-E7 ::= IDEN PABRE Lista_Param PCIERRA ;
+E7 ::= IDEN PABRE Lista_Param_Vac PCIERRA ;
 E7 ::= E8 ; 
 
 E8 ::= ENTPOS ;

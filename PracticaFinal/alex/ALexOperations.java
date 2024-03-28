@@ -163,4 +163,7 @@ public class ALexOperations {
   public UnidadLexica unidadType() { // 51
    return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.TYPE);
   }
+  public UnidadLexica unidadVoid() { // 52
+   return new UnidadLexica(alex.fila(),alex.columna(),ClaseLexica.VOID);
+  }
 }
