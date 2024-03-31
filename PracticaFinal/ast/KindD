@@ -1,0 +1,5 @@
+package ast;
+
+public enum KindD {
+    TIPO, STRUCT, VARIABLE, CONSTANTE, FUNCION, FUNVOID
+} 
