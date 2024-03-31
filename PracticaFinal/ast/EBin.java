@@ -16,4 +16,8 @@ public abstract class EBin extends Exp {
    public String toString() {
 		  return expTipo.toString() + '(' + opnd1.toString() + ',' + opnd2.toString() + ')';
 	 }
+   public void type() throws TypeException {
+		  opnd1.type();
+		  opnd2.type();
+	 }
 }

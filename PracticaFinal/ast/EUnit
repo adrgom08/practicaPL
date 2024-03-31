@@ -15,5 +15,7 @@ public abstract class ExpUnit extends Exp {
 	public String toString() {
 		return expTipo.toString() + '(' + opnd.toString() + ')';
 	}
-	
+	public void type() throws TypeException {
+		opnd.type();
+	}
 }
