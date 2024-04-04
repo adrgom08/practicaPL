@@ -1,5 +1,5 @@
 package ast;
 
-public enum KindD {
+public enum KindDec {
     TIPO, STRUCT, VARIABLE, CONSTANTE, FUNCION, FUNVOID
 } 

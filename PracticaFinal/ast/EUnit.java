@@ -3,14 +3,14 @@ package ast;
 public abstract class ExpUnit extends Exp {
 	protected Exp opnd;
 	
-	public ExpUnit(int fila,int columna,KindE expTipo, Exp opnd) {
+	public ExpUnit(int fila,int columna,KindE expTipo, Exp op) {
 	    this.expTipo = expTipo;
-	    this.opnd = opnd;
+	    this.opnd = op;
 	    this.fila = fila;
 	    this.columna = columna;
 	}
 	
-	public Exp opnd() {return opnd;}
+	public Exp getOpnd() {return opnd;}
 	
 	public String toString() {
 		return expTipo.toString() + '(' + opnd.toString() + ')';

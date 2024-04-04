@@ -1,5 +1,0 @@
-package ast;
-
-public enum KindT {
-    INT, BOOL, NULL, ARRAY, STRUCT, POINTER, IDEN, REF, 
-} 

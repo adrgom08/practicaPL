@@ -12,6 +12,10 @@ public abstract class Exp implements ASTNode {
     	if(tipo.kindType() == KindType.REF)return tipo.getTipo();
     	return tipo;
     }
+    public Dec getDec(String iden) throws TypeException {
+    	return tipo.getDec(iden);
+    }
+    public int getFila(){ return fila; }
 
     public Exp opnd1() {throw new UnsupportedOperationException("opnd1");} 
     public Exp opnd2() {throw new UnsupportedOperationException("opnd2");} 

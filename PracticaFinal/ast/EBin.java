@@ -4,10 +4,10 @@ public abstract class EBin extends Exp {
    protected Exp opnd1;
    protected Exp opnd2;
 
-   public ExpBin(int fila,int columna,KindE expTipo, Exp opnd1, Exp opnd2) {
+   public ExpBin(int fila,int columna,KindE expTipo, Exp op1, Exp op2) {
       this.expTipo = expTipo;
-      this.opnd1 = opnd1;
-      this.opnd2 = opnd2;
+      this.opnd1 = op1;
+      this.opnd2 = op2;
       this.fila = fila;
       this.columna = columna;
    }
