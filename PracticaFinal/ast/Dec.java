@@ -1,20 +1,20 @@
 package ast;
 
 public abstract class Dec implements ASTNode {
-    protected Tipo tipo;
+    protected Type tipo;
     protected String id;
     protected int fila;
     protected int columna;
     protected KindDec tipoDec;
 
-    public Dec(int fila, int columna, Tipo tipo, String id) {
+    public Dec(int fila, int columna, Type tipo, String id) {
         this.fila = fila;
         this.columna = columna;
         this.tipo = tipo;
         this.id = id;
     }
 
-    public Tipo getTipo() { 
+    public Type getTipo() { 
         if(tipo.kindType() == KindType.REF)return tipo.getTipo();
     	return tipo;
     }

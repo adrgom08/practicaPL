@@ -1,4 +1,5 @@
 package ast;
+
 import java.util.ArrayList;
 
 public class DecStruct extends Dec {
@@ -11,7 +12,7 @@ public class DecStruct extends Dec {
     }
 
     public String toString(){
-        StringBuilder str;
+        StringBuilder str = new StringBuilder();
 
 		str.append(id);
 		str.append(" {\n");

@@ -23,7 +23,4 @@ public class Program implements ASTNode {
         // ...
     }
 
-    public void type() throws TypeException {
-    	for (Dec dec : ds) dec.type();
-    }
 }

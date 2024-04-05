@@ -1,14 +1,14 @@
 package ast;
 
 public abstract class Exp implements ASTNode {
-    protected Tipo tipo;
+    protected Type tipo;
     protected KindE tipoExp;
     protected int fila;
 	protected int columna;
 
-    public abstract KindE kind() {return tipoExp;};
+    public abstract KindE kind() {return TypeExp;};
     public NodeKind nodeKind() {return NodeKind.EXPRESSION;}
-    public Tipo getTipo() {
+    public Type getTipo() {
     	if(tipo.kindType() == KindType.REF)return tipo.getTipo();
     	return tipo;
     }

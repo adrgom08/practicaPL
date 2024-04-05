@@ -2,7 +2,7 @@ package ast;
 
 import exceptions.TypeException;
 
-public class Type {
+public class Type implements ASTNode {
     protected KindType tipoType;
     protected int fila;
     protected int columna;
@@ -18,7 +18,5 @@ public class Type {
     //public Tipo getTipo(){ return null; }
     //public Dec getDec() { return null; }
     // Excepciones
-
-
 
 }
