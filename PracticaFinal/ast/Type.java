@@ -11,8 +11,6 @@ public class Type {
     public KindType getKindType(){ return tipoType; }
     public int getFila(){return fila;}
     public int getColumna(){return columna;}
-    public void type() throws TypeException{}
-
     public String getId(){ return tipoType.toString();}
 
     
