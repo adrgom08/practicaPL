@@ -7,7 +7,7 @@ public class ExpPos extends EUnit {
    }
 
    public String toString() {
-    return "(+" + opnd2.toString() + ')';
+    return "(+" + opnd.toString() + ')';
     }
 
 }

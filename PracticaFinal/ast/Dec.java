@@ -15,7 +15,6 @@ public abstract class Dec implements ASTNode {
     }
 
     public Type getTipo() { 
-        if(tipo.kindType() == KindType.REF)return tipo.getTipo();
     	return tipo;
     }
     public KindDec getKindDec(){return tipoDec;}
@@ -26,8 +25,6 @@ public abstract class Dec implements ASTNode {
     public NodeKind nodeKind() {
         return NodeKind.DECLARATION;
     }
-
-    public abstract void bind() throws TypeException;
 
     public String toString() {
         return tipo.toString() + " " + id;

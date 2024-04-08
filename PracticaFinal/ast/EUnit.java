@@ -1,9 +1,9 @@
 package ast;
 
-public abstract class ExpUnit extends Exp {
+public abstract class EUnit extends Exp {
 	protected Exp opnd;
 	
-	public ExpUnit(int fila,int columna,KindE expTipo, Exp op) {
+	public EUnit(int fila, int columna, KindExp expTipo, Exp op) {
 	    this.tipoExp = expTipo;
 	    this.opnd = op;
 	    this.fila = fila;
@@ -14,8 +14,5 @@ public abstract class ExpUnit extends Exp {
 	
 	public String toString() {
 		return tipoExp.toString() + '(' + opnd.toString() + ')';
-	}
-	public void type() throws TypeException {
-		opnd.type();
 	}
 }

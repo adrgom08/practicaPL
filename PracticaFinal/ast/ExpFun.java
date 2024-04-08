@@ -8,7 +8,7 @@ public class ExpFun extends Exp {
     ArrayList<Exp> params;
     
     public ExpFun (int fila, int columna, Exp id, ArrayList<Exp> params) {
-        super(fila, columna, KindExp.CORCHETE, op1, op2);
+        // super(fila, columna, KindExp.CORCHETE, op1, op2);
     }
  
     public String toString() {
@@ -18,7 +18,7 @@ public class ExpFun extends Exp {
         for (Exp e : params){
             str.append(e.toString());
         }
-        str.deleteCharAt(str.size()-1);
+        str.deleteCharAt(str.length()-1);
 		str.append(")\n");
 
 		return str.toString();
