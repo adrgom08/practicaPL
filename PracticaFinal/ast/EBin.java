@@ -4,7 +4,7 @@ public abstract class EBin extends Exp {
    protected Exp opnd1;
    protected Exp opnd2;
 
-   public EBin(int fila,int columna, KindE expTipo, Exp op1, Exp op2) {
+   public EBin(int fila,int columna, KindExp expTipo, Exp op1, Exp op2) {
       this.tipoExp = expTipo;
       this.opnd1 = op1;
       this.opnd2 = op2;

@@ -1,7 +1,4 @@
 package ast;
-
-import exceptions.TypeException;
-
 public class Type implements ASTNode {
     protected KindType tipoType;
     protected int fila;
