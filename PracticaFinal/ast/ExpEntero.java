@@ -10,7 +10,7 @@ public class ExpEntero extends Exp {
        this.fila = fila;
        this.columna = columna;
        this.id = e;
-       this.tipoExp = KindExp.BOOLEANO;
+       this.tipoExp = KindExp.ENTERO;
     }
  
     public String toString() { return id; }

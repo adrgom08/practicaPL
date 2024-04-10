@@ -7,7 +7,7 @@ public abstract class ExpIgual extends EBin {
    }
 
    public String toString() {
-    return '(' + opnd1.toString() + " = " + opnd2.toString() + ')';
+    return '(' + opnd1.toString() + " == " + opnd2.toString() + ')';
     }
 
 }

@@ -3,12 +3,15 @@ package ast;
 import java.util.ArrayList;
 
 public class ExpFun extends Exp {
-
     Exp id;
     ArrayList<Exp> params;
     
     public ExpFun (int fila, int columna, Exp id, ArrayList<Exp> params) {
-        // super(fila, columna, KindExp.CORCHETE, op1, op2);
+        this.fila = fila;
+		this.columna = columna;
+        this.id = id;
+		this.params = params;
+		this.expTipo = KindExp.FUNCION;
     }
  
     public String toString() {

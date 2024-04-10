@@ -13,12 +13,8 @@ public abstract class Exp implements ASTNode {
     }
 
     public int getFila(){ return fila; }
+    public int getColumna() { return columna;}
 
-    public Exp opnd1() {throw new UnsupportedOperationException("opnd1");} 
-    public Exp opnd2() {throw new UnsupportedOperationException("opnd2");} 
-    public String num() {throw new UnsupportedOperationException("num");}
-    
     public String toString() {return "";}
-
 }
 

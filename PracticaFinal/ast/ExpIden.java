@@ -10,7 +10,7 @@ public class ExpIden extends Exp {
        this.fila = fila;
        this.columna = columna;
        this.id = iden;
-       this.tipoExp = KindExp.BOOLEANO;
+       this.tipoExp = KindExp.IDEN;
     }
  
     public String toString() { return id; }
