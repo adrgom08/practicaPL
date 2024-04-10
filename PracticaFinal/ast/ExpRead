@@ -1,0 +1,16 @@
+package ast;
+
+public class ExpRead extends Exp {
+	private Type tipoReserva;
+	
+	public ExpRead(int fila, int columna, Type tipoReserva) {
+        this.fila= fila;
+		this.columna = columna;
+		this.tipoReserva = tipoReserva;
+		this.expTipo = KindExp.READ;
+	}
+	
+	public String toString() {
+		return "red" + tipoReserva.toString();  
+	}
+}

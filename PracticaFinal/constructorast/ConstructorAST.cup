@@ -212,10 +212,10 @@ E5 ::= REF E6:e6 ;
 E5 ::= E6:e6 ;
    {: RESULT = e6; :};
 
-E6 ::= NEW LENINT ;
-E6 ::= NEW BOOLSHEVIK:b ;
-E6 ::= RED LENINT ;
-E6 ::= RED BOOLSHEVIK ;
+E6 ::= NEW:n T0:tipo ;
+   {: RESULT = new ExpNew(n.getFila(), n.getColumna(), tipo); :};
+E6 ::= RED:r T0:tipo ;
+   {: RESULT = new ExpRead(r.getFila(), r.getColumna(), tipo); :};
 E6 ::= E7:e7;
    {: RESULT = e7; :};
 
