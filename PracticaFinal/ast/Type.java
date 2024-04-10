@@ -1,8 +1,5 @@
 package ast;
-
-import exceptions.TypeException;
-
-public class Type {
+public class Type implements ASTNode {
     protected KindType tipoType;
     protected int fila;
     protected int columna;
@@ -11,8 +8,6 @@ public class Type {
     public KindType getKindType(){ return tipoType; }
     public int getFila(){return fila;}
     public int getColumna(){return columna;}
-    public void type() throws TypeException{}
-
     public String getId(){ return tipoType.toString();}
 
     
@@ -20,7 +15,5 @@ public class Type {
     //public Tipo getTipo(){ return null; }
     //public Dec getDec() { return null; }
     // Excepciones
-
-
 
 }

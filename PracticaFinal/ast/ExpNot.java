@@ -7,7 +7,7 @@ public class ExpNot extends EUnit {
     }
  
     public String toString() {
-     return "(!" + opnd2.toString() + ')';
+     return "(!" + opnd.toString() + ')';
      }
  
  }

@@ -1,4 +1,4 @@
-
+package ast;
 
 public class DecTipo extends Dec {
 

@@ -1,20 +1,17 @@
 package ast;
 
 public abstract class Exp implements ASTNode {
-    protected Tipo tipo;
-    protected KindE tipoExp;
+    protected Type tipo;
+    protected KindExp tipoExp;
     protected int fila;
 	protected int columna;
 
-    public abstract KindE kind() {return tipoExp;};
     public NodeKind nodeKind() {return NodeKind.EXPRESSION;}
-    public Tipo getTipo() {
-    	if(tipo.kindType() == KindType.REF)return tipo.getTipo();
+    
+    public Type getTipo() {
     	return tipo;
     }
-    public Dec getDec(String iden) throws TypeException {
-    	return tipo.getDec(iden);
-    }
+
     public int getFila(){ return fila; }
 
     public Exp opnd1() {throw new UnsupportedOperationException("opnd1");} 
