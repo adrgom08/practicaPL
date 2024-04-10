@@ -11,3 +11,4 @@ public abstract class Ins implements ASTNode {
 	   public int getFila() { return fila; }
 	   public int getColumna() { return columna; }
 }
+

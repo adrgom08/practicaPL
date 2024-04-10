@@ -1,3 +1,4 @@
+
 package ast;
 
 public class ExpPunto extends EBin {
@@ -9,5 +10,4 @@ public class ExpPunto extends EBin {
     public String toString() {
         return '(' + opnd1.toString() + '.' + opnd2.toString() + ')';
     }
- 
  }

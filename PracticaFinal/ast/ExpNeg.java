@@ -9,5 +9,4 @@ public class ExpNeg extends EUnit {
    public String toString() {
     return "(-" + opnd.toString() + ')';
     }
-
 }

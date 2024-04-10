@@ -11,6 +11,6 @@ public class DecTipo extends Dec {
     }
 
     public String toString(){
-        return "tipo " + iden + " << " + tipo.toString() + ';';
+        return "tipo " + iden + " := " + tipo.toString() + ';';
     }
 }

@@ -1,4 +1,5 @@
 package ast;
+
 public class Type implements ASTNode {
     protected KindType tipoType;
     protected int fila;
