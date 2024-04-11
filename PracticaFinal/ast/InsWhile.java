@@ -1,0 +1,22 @@
+package ast;
+
+public class InsWhile extends Ins {
+	private Exp e;
+	private Ins bloque;
+	
+	public InsWhile(int fila, int columna, Exp e, Ins bloque) {
+        this.fila = fila;
+		this.columna = columna;
+		this.bloque = bloque;
+		this.e = e;
+		this.consIns = KindIns.WHILE;
+	}
+	
+	public String toString() {
+		StringBuilder str = new StringBuilder("USSWhile (");
+		str.append(e.toString());
+		str.append(") ");
+		str.append(insBloque.toString());
+		return str.toString();
+	}
+}
