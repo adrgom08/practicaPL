@@ -147,8 +147,10 @@ Instruccion ::= InsCall:i ;
 
 InsAsig ::= Expr:e1 ASIGNACION Expr:e2 PUNTOYCOMA ;
    {: RESULT = new InsAsig(e1.getFila(),e1.getColumna(),e1,e2); :};
-InsIf ::= TROTSKIF PABRE Expr PCIERRA LLABRE Bloque LLCIERRA ;
-InsIfElse ::= TROTSKIF PABRE Expr PCIERRA LLABRE Bloque LLCIERRA FIDELSECASTRO LLABRE Bloque LLCIERRA ;
+InsIf ::= TROTSKIF PABRE Expr:e PCIERRA LLABRE Bloque:b LLCIERRA ;
+   {: RESULT = new InsIf(e.getFila(),e.getColumna(),e,b); :};
+InsIfElse ::= TROTSKIF PABRE Expr:e PCIERRA LLABRE Bloque:b1 LLCIERRA FIDELSECASTRO LLABRE Bloque:b2 LLCIERRA ;
+   {: RESULT = new InsIf_Else(e.getFila(),e.getColumna(),e,b1,b2); :};
 InsIfElse ::= TROTSKIF error LLCIERRA:l
    {: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Instruccion condicional incorrecta."); :};
 InsWhile ::= USSWHILE PABRE Expr:e PCIERRA LLABRE Bloque:b LLCIERRA ;
@@ -158,9 +160,12 @@ InsWhile ::= USSWHILE error LLCIERRA:l
 InsFor ::= FORLETARIAT PABRE Dec_Var_Ini Expr PUNTOYCOMA InsAsig PCIERRA LLABRE Bloque LLCIERRA ;
 InsFor ::= FORLETARIAT error LLCIERRA:l 
    {: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Instruccion forLetariat incorrecta."); :};
-InsWrite ::= WRITE PABRE Expr PCIERRA PUNTOYCOMA ;
-InsDelete ::= DELETE Expr PUNTOYCOMA ;
-InsCall ::= CALL IDEN PABRE Lista_Param_Vac PCIERRA PUNTOYCOMA ;
+InsWrite ::= WRITE PABRE Expr:e PCIERRA PUNTOYCOMA ;
+   {: RESULT = new InsWrite(e.getFila(),e.getColumna(),e); :};
+InsDelete ::= DELETE Expr:e PUNTOYCOMA ;
+   {: RESULT = new InsDelete(e.getFila(),e.getColumna(),e); :};
+InsCall ::= CALL E7:e7 PABRE Lista_Param_Vac:list_params PCIERRA PUNTOYCOMA ;
+   {: RESULT = new InsCall(e7.getFila(),e7.getColumna(), new ExpFun(e7.getFila(), e7.getColumna(), e7, list_params)); :};
 InsCall ::= CALL error PUNTOYCOMA:p
    {: System.out.println("FILA " + p.fila + ", COLUMNA " + p.columna + ": Llamada a funcion incorrecta."); :};
 
