@@ -10,11 +10,5 @@ public class Type implements ASTNode {
     public int getFila(){return fila;}
     public int getColumna(){return columna;}
     public String getId(){ return tipoType.toString();}
-
     
-    // NECESARIO? O con excepciones
-    //public Tipo getTipo(){ return null; }
-    //public Dec getDec() { return null; }
-    // Excepciones
-
 }

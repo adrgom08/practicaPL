@@ -1,6 +1,7 @@
 package ast;
 
 import java.util.ArrayList;
+import javafx.util.*;
 
 public class Bloque extends Ins {
 	private Pair<ArrayList<Dec>,ArrayList<Ins>> b;

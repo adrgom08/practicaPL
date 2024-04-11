@@ -7,6 +7,7 @@ import alex.TokenValue;
 import errors.GestionErroresTiny;
 import ast.*;
 import java.util.*;
+import javafx.util.*; 
 
 scan with {: return getScanner().next_token(); :};
 parser code {: 
@@ -45,7 +46,7 @@ Main ::= MAIN error LLCIERRA:l
 
 
 Bloque ::= Lista_Declaraciones_Vac:decs Lista_Instrucciones_Vac:ins ;
-   {: RESULT = new Bloque(new Pair(decs,ins)); :}; 
+   {: RESULT = new Bloque(new Pair<> (decs,ins)); :}; 
 
 Lista_Instrucciones_Vac ::= Lista_Instrucciones:ins ;
    {: RESULT = ins; :};
