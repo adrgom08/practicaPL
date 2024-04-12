@@ -46,7 +46,7 @@ Main ::= MAIN error LLCIERRA:l
 
 
 Bloque ::= Lista_Declaraciones_Vac:decs Lista_Instrucciones_Vac:ins ;
-   {: RESULT = new Bloque(new Pair<> (decs,ins)); :}; 
+   {: RESULT = new Bloque(new Pair<>(decs,ins)); :}; 
 
 Lista_Instrucciones_Vac ::= Lista_Instrucciones:ins ;
    {: RESULT = ins; :};
@@ -92,14 +92,22 @@ Dec_Struct ::= STALINTRUCT error LLCIERRA:l
 CuerpoStruct ::= Lista_Declaraciones_Vac ;
 
 // Tipos 
-T0 ::= POINTER T0 ;
-T0 ::= T1 ;
-T1 ::= GUEVARRAY T1 CABRE Expr CCIERRA ;
-T1 ::= PABRE T0 PCIERRA ;
-T1 ::= IDEN ;
-T1 ::= T2 ;
+T0 ::= POINTER T0:t0 ;
+   {: RESULT = new TypePointer(t0); :};
+T0 ::= T1:t1 ;
+    {: RESULT = t1; :};
+T1 ::= GUEVARRAY T1:t1 CABRE Expr:e CCIERRA ;
+   {: RESULT = new TypeArray(t1.fila(), t1.columna(), t1, e); :};
+T1 ::= PABRE T0:t0 PCIERRA ;
+    {: RESULT = t0; :};
+T1 ::= IDEN:iden ;
+    {: RESULT = new TypeIden(iden.fila, iden.columna, iden.lexema); :};
+T1 ::= T2:t2 ;
+    {: RESULT = t2; :};
 T2 ::= LENINT ;
+    {: RESULT = new TypeEnt(); :};
 T2 ::= BOOLSHEVIK ;
+    {: RESULT = new TypeBool(); :};
 
 // Declaracion de variables
 Dec_Var ::= Dec_Var_Vacia ;
