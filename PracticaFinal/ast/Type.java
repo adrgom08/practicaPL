@@ -5,10 +5,24 @@ public class Type implements ASTNode {
     protected int fila;
     protected int columna;
 
-    public NodeKind nodeKind(){return NodeKind.TYPE;}
-    public KindType getKindType(){ return tipoType; }
-    public int getFila(){return fila;}
-    public int getColumna(){return columna;}
-    public String getId(){ return tipoType.toString();}
-    
+    public NodeKind nodeKind() {
+        return NodeKind.TYPE;
+    }
+
+    public KindType getKindType() {
+        return tipoType;
+    }
+
+    public int getFila() {
+        return fila;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
+
+    public String getId() {
+        return tipoType.toString();
+    }
+
 }

@@ -5,17 +5,17 @@ public class InsFor extends Ins {
 	private Ins asig;
 	private Ins bloque;
 	private Dec dec;
-	
+
 	public InsFor(int fila, int columna, Dec dec, Exp e, Ins asig, Ins bloque) {
-        this.fila = fila;
+		this.fila = fila;
 		this.columna = columna;
 		this.dec = dec;
 		this.e = e;
 		this.asig = asig;
 		this.bloque = bloque;
-		this.consIns = KindIns.FOR;
+		this.tipoIns = KindIns.FOR;
 	}
-	
+
 	public String toString() {
 		StringBuilder str = new StringBuilder("forLetariat ( ");
 		str.append(dec.toString());

@@ -1,18 +1,18 @@
 package ast;
 
-public class ExpFlecha extends EBin {
-    private Exp id;
+public class ExpFlecha extends Exp {
+	private Exp id;
 	private String campo;
-	
+
 	public ExpFlecha(int fila, int columna, Exp id, String campo) {
-        this.fila = fila;
-	    this.columna = columna;
-        this.id = id;
-	    this.campo = campo;
-	    this.expTipo = KindExp.FLECHA;
+		this.fila = fila;
+		this.columna = columna;
+		this.id = id;
+		this.campo = campo;
+		this.tipoExp = KindExp.FLECHA;
 	}
-	
+
 	public String toString() {
-		return id.toString() + '->' + campo;
+		return id.toString() + "->" + campo;
 	}
- }
+}
