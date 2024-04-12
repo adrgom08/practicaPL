@@ -76,12 +76,16 @@ Iniciales ::= Dec_Void ;
 Iniciales ::= Declaracion ;
 
 // Declaraciones en bloques 
-Declaracion ::= Dec_Tipo ;
-Declaracion ::= Dec_Struct ;
-Declaracion ::= Dec_Var ;
+Declaracion ::= Dec_Tipo:d ;
+   {: RESULT = d; :};
+Declaracion ::= Dec_Struct:d ;
+   {: RESULT = d; :};
+Declaracion ::= Dec_Var:d ;
+   {: RESULT = d; :};
 
 // Declaracion de Tipos 
-Dec_Tipo ::= TYPE IDEN ASIGNACION T0 PUNTOYCOMA ;
+Dec_Tipo ::= TYPE IDEN:iden ASIGNACION T0:t0 PUNTOYCOMA ;
+   {: RESULT = new DecType(iden.fila, iden.columna, iden, t0); :};
 Dec_Tipo ::= TYPE error PUNTOYCOMA:p 
    {: System.out.println("FILA " + p.fila + ", COLUMNA " + p.columna + ": Declaracion de tipo incorrecta."); :};
 
@@ -110,13 +114,20 @@ T2 ::= BOOLSHEVIK ;
     {: RESULT = new TypeBool(); :};
 
 // Declaracion de variables
-Dec_Var ::= Dec_Var_Vacia ;
-Dec_Var ::= Dec_Var_Ini ;
+Dec_Var ::= Dec_Var_Vacia:d ;
+   {: RESULT = d; :};
+Dec_Var ::= Dec_Var_Ini:d ;
+   {: RESULT = d; :};
 Dec_Var ::= VAR error PUNTOYCOMA:p
    {: System.out.println("FILA " + p.fila + ", COLUMNA " + p.columna + ": Declaracion de variable incorrecta."); :};
-Dec_Var_Vacia ::= VAR T0 IDEN PUNTOYCOMA ;
-Dec_Var_Ini ::= VAR T0 IDEN ASIGNACION Expr PUNTOYCOMA ;
-Dec_Var_Ini ::= VAR CONST T0 IDEN ASIGNACION Expr PUNTOYCOMA ;
+Dec_Var_Vacia ::= VAR T0:t0 IDEN:iden PUNTOYCOMA ;
+   {: RESULT = new DecVar(t0.fila(), t0.columna(), iden.lexema, t0); :};
+Dec_Var_Ini ::= VAR T0:t0 IDEN:iden ASIGNACION Expr:e PUNTOYCOMA ;
+   {: RESULT = new DecVarIni(t0.fila(), t0.columna(), iden.lexema, t0, 
+   new InsAsig(iden.fila, iden.columna, new ExpIden(iden.fila, iden.columna, iden.lexema), e)); :};
+Dec_Var_Ini ::= VAR CONST T0:t0 IDEN:iden ASIGNACION Expr:e PUNTOYCOMA ;
+   {: RESULT = new DecVarConst(t0.fila(), t0.columna(), iden.lexema, t0, 
+   new InsAsig(iden.fila, iden.columna, new ExpIden(iden.fila, iden.columna, iden.lexema), e)); :};
 
 // Declaracion de funciones tipo void
 Dec_Void ::= FUN VOID IDEN PABRE Lista_Argumentos_Vac PCIERRA LLABRE Bloque LLCIERRA ;
@@ -166,7 +177,8 @@ InsWhile ::= USSWHILE PABRE Expr:e PCIERRA LLABRE Bloque:b LLCIERRA ;
    {: RESULT = new InsWhile(e.getFila(),e.getColumna(),e,b); :};
 InsWhile ::= USSWHILE error LLCIERRA:l 
    {: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Instruccion USSWhile incorrecta."); :};
-InsFor ::= FORLETARIAT PABRE Dec_Var_Ini Expr PUNTOYCOMA InsAsig PCIERRA LLABRE Bloque LLCIERRA ;
+InsFor ::= FORLETARIAT PABRE Dec_Var_Ini:dec Expr:e PUNTOYCOMA InsAsig:asig PCIERRA LLABRE Bloque:b LLCIERRA ;
+    {: RESULT = new InsFor(dec.getFila(),dec.getColumna(),dec,e,asig,b); :};
 InsFor ::= FORLETARIAT error LLCIERRA:l 
    {: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Instruccion forLetariat incorrecta."); :};
 InsWrite ::= WRITE PABRE Expr:e PCIERRA PUNTOYCOMA ;
