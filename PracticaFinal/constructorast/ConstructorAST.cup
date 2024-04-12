@@ -46,7 +46,7 @@ Main ::= MAIN error LLCIERRA:l
 
 
 Bloque ::= Lista_Declaraciones_Vac:decs Lista_Instrucciones_Vac:ins ;
-   {: RESULT = new Bloque(new Pair<>(decs,ins)); :}; 
+   {: RESULT = new Bloque(decs,ins); :}; 
 
 Lista_Instrucciones_Vac ::= Lista_Instrucciones:ins ;
    {: RESULT = ins; :};
@@ -71,9 +71,12 @@ Declaraciones_Ini_Vac ::= Declaraciones_Ini ;
 Declaraciones_Ini_Vac ::= ;
 Declaraciones_Ini ::= Declaraciones_Ini Iniciales ;
 Declaraciones_Ini ::= Iniciales ;
-Iniciales ::= Dec_Fun ;
-Iniciales ::= Dec_Void ;
-Iniciales ::= Declaracion ;
+Iniciales ::= Dec_Fun:d ;
+    {: RESULT = d; :};
+Iniciales ::= Dec_Void:d ;
+    {: RESULT = d; :};
+Iniciales ::= Declaracion:d ;
+    {: RESULT = d; :};
 
 // Declaraciones en bloques 
 Declaracion ::= Dec_Tipo:d ;
@@ -135,16 +138,23 @@ Dec_Void ::= FUN VOID error LLCIERRA:l
    {: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Declaracion de funcion incorrecta."); :};
 
 // Declaracion de funciones 
-Dec_Fun ::= FUN T0 IDEN PABRE Lista_Argumentos_Vac PCIERRA LLABRE Bloque RETURN Expr PUNTOYCOMA LLCIERRA ;
+Dec_Fun ::= FUN T0:t0 IDEN:iden PABRE Lista_Argumentos_Vac:list_args PCIERRA LLABRE Bloque:b RETURN Expr:e PUNTOYCOMA LLCIERRA ;
+   {: RESULT = new DecFun(t0.fila(), t0.columna(), iden.lexema, list_args, b, e); :};
 Dec_Fun ::= FUN error LLCIERRA:l 
    {: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Declaracion de funcion incorrecta."); :};
 
-Lista_Argumentos_Vac ::= Lista_Argumentos ;
+Lista_Argumentos_Vac ::= Lista_Argumentos:list_args ;
+   {: RESULT = list_args; :};
 Lista_Argumentos_Vac ::= ;
-Lista_Argumentos ::= Lista_Argumentos COMA Argumento ;
-Lista_Argumentos ::= Argumento ;
-Argumento ::= T0 IDEN ;
-Argumento ::= T0 REF IDEN ;
+   {: RESULT = new ArrayList<Dec> (); :};
+Lista_Argumentos ::= Lista_Argumentos:list_args COMA Argumento:arg ;
+   {: list_args.add(arg); RESULT = list_args; :};
+Lista_Argumentos ::= Argumento:arg ;
+   {: ArrayList<Dec> list_args (); list_args.add(arg); RESULT = list_args; :};
+Argumento ::= T0:t0 IDEN:iden ;
+   {: RESULT = new DecArg(t0.fila(), t0.columna(), iden.lexema, t0); :};
+Argumento ::= T0:t0 REF IDEN:iden ;
+   {: RESULT = new DecArg(t0.fila(), t0.columna(), iden.lexema, t0); :};
 
 
 // Instrucciones

@@ -1,25 +1,26 @@
 package ast;
 
 import java.util.ArrayList;
-import javafx.util.*;
 
 public class Bloque extends Ins {
-	private Pair<ArrayList<Dec>,ArrayList<Ins>> b;
+	private ArrayList<Dec> decs;
+	private ArrayList<Ins> ins;
 	
-	public Bloque(Pair<ArrayList<Dec>,ArrayList<Ins>> b) {
-		this.b = b;
+	public Bloque(ArrayList<Dec> decs, ArrayList<Ins> ins) {
+		this.decs = decs;
+		this.ins = ins;
         this.tipoIns = KindIns.BLOCK;
 	}
 	
 	public String toString() {
 		StringBuilder str = new StringBuilder("");
         str.append('{\n')
-		for (Dec dec : b.getFirst()) {
-			str.append(dec.toString());
+		for (Dec d : decs) {
+			str.append(d.toString());
 			str.append('\n');
 		}
-		for (Ins ins : b.getSecond()) {
-			str.append(ins.toString());
+		for (Ins i : ins) {
+			str.append(i.toString());
 			str.append('\n');
 		}
         str.append('}');

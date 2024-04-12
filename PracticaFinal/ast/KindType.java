@@ -1,5 +1,5 @@
 package ast;
 
 public enum KindType {
-    ENT, BOOL, ARRAY, POINTER, IDEN
+    ENT, BOOL, ARRAY, POINTER, IDEN, REF
 } 
