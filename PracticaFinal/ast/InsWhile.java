@@ -16,7 +16,9 @@ public class InsWhile extends Ins {
 		StringBuilder str = new StringBuilder("USSWhile (");
 		str.append(e.toString());
 		str.append(") ");
+		str.append("{\n");
 		str.append(bloque.toString());
+		str.append("\n}");
 		return str.toString();
 	}
 }

@@ -16,7 +16,9 @@ public class InsIf extends Ins {
 		StringBuilder str = new StringBuilder("trotskIf (");
 		str.append(e.toString());
 		str.append(") ");
+		str.append("{\n");
 		str.append(bloque.toString());
+		str.append("\n}");
 		return str.toString();
 	}
 }

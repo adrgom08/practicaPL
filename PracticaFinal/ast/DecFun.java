@@ -22,21 +22,22 @@ public class DecFun extends Dec {
 
 	public String toString() {
 		StringBuilder str = new StringBuilder("fun ");
+        str.append(returnType.toString());
+        str.append(' ');
 		str.append(id);
-		str.append('(');
+		str.append(' (');
 		for (Dec dec : args) {
 			str.append(dec.toString());
 			str.append(", ");
 		}
 		str.delete(str.length() - 2, str.length());
-		str.append(") dev ");
-		str.append(returnType.toString());
-		str.append('\n');
+		str.append(") ");
+		str.append("{\n");
 		str.append(bloque.toString());
-		str.append("devolver ");
+		str.append("return ");
 		str.append(e.toString());
 		str.append(";\n");
-		str.append("ffun\n");
+		str.append("\n}");
 		return str.toString();
 	}
 }

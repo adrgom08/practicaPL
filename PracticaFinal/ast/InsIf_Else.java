@@ -18,9 +18,13 @@ public class InsIf_Else extends Ins {
 		StringBuilder str = new StringBuilder("trotskif (");
 		str.append(e.toString());
 		str.append(") ");
+		str.append("{\n");
 		str.append(bloqueIf.toString());
+		str.append("\n}");
 		str.append("\n fidElseCastro ");
+		str.append("{\n");
 		str.append(bloqueElse.toString());
+		str.append("\n}");
 		return str.toString();
 	}
 }

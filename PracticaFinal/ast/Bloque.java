@@ -14,7 +14,6 @@ public class Bloque extends Ins {
 
 	public String toString() {
 		StringBuilder str = new StringBuilder("");
-		str.append("{\n");
 		for (Dec d : decs) {
 			str.append(d.toString());
 			str.append('\n');
@@ -23,7 +22,6 @@ public class Bloque extends Ins {
 			str.append(i.toString());
 			str.append('\n');
 		}
-		str.append('}');
 		return str.toString();
 	}
 }
