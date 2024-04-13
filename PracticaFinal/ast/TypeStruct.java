@@ -1,0 +1,28 @@
+package ast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class TypeStruct extends Tipo {
+    private ArrayList<Dec> listaDs;
+    private HashMap<String, Dec> dicDs;
+
+    public TypeStruct(ArrayList<Dec> listaDs) {
+        this.tipoType = KindType.STRUCT;
+        this.listaDs = listaDs;
+        this.dicDs = new HashMap<String, Dec>();
+        for (Dec dec : listaDs)
+            dicDs.put(dec.getIden(), dec);
+    }
+
+    public String toString() {
+        StringBuilder str = new StringBuilder("stalinTruct {\n");
+        for (Dec dec : listaDs) {
+            str.append(dec.toString());
+            str.append('\n');
+        }
+        str.append('}');
+        str.append('\n');
+        return str.toString();
+    }
+}

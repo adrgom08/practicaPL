@@ -8,7 +8,7 @@ public class DecFunVoid extends Dec {
     private String id;
     private int maxSize;
 
-    public DecFunVoid(int fila, int columna, Type tipo, String id, ArrayList<Dec> args, Ins bloque) {
+    public DecFunVoid(int fila, int columna, String id, Type tipo, ArrayList<Dec> args, Ins bloque) {
         super(fila, columna, tipo, id);
         this.decTipo = KindDec.FUNVOID;
         this.args = args;

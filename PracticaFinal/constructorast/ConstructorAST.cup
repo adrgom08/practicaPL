@@ -36,11 +36,12 @@ non terminal  Programa, Lista_Instrucciones_Vac, Lista_Instrucciones, Instruccio
                 Lista_Param_Vac, Lista_Param,  Bloque, T0, T1, T2, Dec_Var, Dec_Var_Vacia, Dec_Var_Ini,
                 Dec_Fun, Dec_Void, Lista_Argumentos_Vac, Lista_Argumentos, Argumento, Dec_Tipo, Dec_Struct,
                 CuerpoStruct, Lista_Declaraciones_Vac, Lista_Declaraciones, Declaracion, Declaraciones_Ini_Vac,
-                Declaraciones_Ini, Iniciales, Main;
+                Declaraciones_Ini, Inicial, Main;
 
 Programa ::= Declaraciones_Ini_Vac Main ;
 
-Main ::= MAIN LLABRE Bloque LLCIERRA ;
+Main ::= MAIN LLABRE Bloque:b LLCIERRA ; // Gestionamos el main como una funcion void sin argumentos
+   {: RESULT = new DecFunVoid(b.fila(), b.columna(), "main", new TypeFunVoid(new ArrayList<Dec> ()), new ArrayList<Dec> (), b); :};
 Main ::= MAIN error LLCIERRA:l
    {: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Declaracion de main incorrecta."); :};
 
@@ -54,7 +55,7 @@ Lista_Instrucciones_Vac ::= ;
    {: RESULT = new ArrayList<Ins>(); :};
 Lista_Instrucciones ::= Lista_Instrucciones:ins Instruccion:i ;
    {: ins.add(i); RESULT = ins; :};
-Lista_Instrucciones ::= Instruccion ;
+Lista_Instrucciones ::= Instruccion:i ;
    {: ArrayList<Ins> ins = new ArrayList<Ins>(); ins.add(i); RESULT = ins; :};
 
 Lista_Declaraciones_Vac ::= Lista_Declaraciones:decs ;
@@ -63,19 +64,23 @@ Lista_Declaraciones_Vac ::= ;
    {: RESULT = new ArrayList<Dec>(); :};
 Lista_Declaraciones ::= Lista_Declaraciones:decs Declaracion:d ;
    {: decs.add(d); RESULT = decs; :};
-Lista_Declaraciones ::= Declaracion ;
+Lista_Declaraciones ::= Declaracion:d ;
    {: ArrayList<Dec> decs = new ArrayList<Dec>(); decs.add(d); RESULT = decs; :};
 
 // Delaraciones iniciales
-Declaraciones_Ini_Vac ::= Declaraciones_Ini ;
+Declaraciones_Ini_Vac ::= Declaraciones_Ini:decs ;
+   {: RESULT = decs; :};
 Declaraciones_Ini_Vac ::= ;
-Declaraciones_Ini ::= Declaraciones_Ini Iniciales ;
-Declaraciones_Ini ::= Iniciales ;
-Iniciales ::= Dec_Fun:d ;
+   {: RESULT = new ArrayList<Dec> (); :};
+Declaraciones_Ini ::= Declaraciones_Ini:decs Inicial:ini ;
+   {: decs.add(ini); RESULT = decs; :};
+Declaraciones_Ini ::= Inicial:ini ;
+   {: ArrayList<Dec> decs = new ArrayList<Dec>(); decs.add(ini); RESULT = decs; :};
+Inicial ::= Dec_Fun:d ;
     {: RESULT = d; :};
-Iniciales ::= Dec_Void:d ;
+Inicial ::= Dec_Void:d ;
     {: RESULT = d; :};
-Iniciales ::= Declaracion:d ;
+Inicial ::= Declaracion:d ;
     {: RESULT = d; :};
 
 // Declaraciones en bloques 
@@ -88,15 +93,17 @@ Declaracion ::= Dec_Var:d ;
 
 // Declaracion de Tipos 
 Dec_Tipo ::= TYPE IDEN:iden ASIGNACION T0:t0 PUNTOYCOMA ;
-   {: RESULT = new DecType(iden.fila, iden.columna, iden, t0); :};
+   {: RESULT = new DecType(iden.fila, iden.columna, iden.lexema, t0); :};
 Dec_Tipo ::= TYPE error PUNTOYCOMA:p 
    {: System.out.println("FILA " + p.fila + ", COLUMNA " + p.columna + ": Declaracion de tipo incorrecta."); :};
 
 // Declaracion de Structs
-Dec_Struct ::= STALINTRUCT IDEN LLABRE CuerpoStruct LLCIERRA ;
+Dec_Struct ::= STALINTRUCT IDEN:iden LLABRE CuerpoStruct:decs LLCIERRA ;
+    {: RESULT = new DecStruct(iden.fila, iden.columna, iden.lexema, new TypeStruct(decs), decs); :};
 Dec_Struct ::= STALINTRUCT error LLCIERRA:l
    {: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Declaracion de struct incorrecta."); :};
-CuerpoStruct ::= Lista_Declaraciones_Vac ;
+CuerpoStruct ::= Lista_Declaraciones_Vac:decs ;
+   {: RESULT = decs; :};
 
 // Tipos 
 T0 ::= POINTER T0:t0 ;
@@ -133,7 +140,8 @@ Dec_Var_Ini ::= VAR CONST T0:t0 IDEN:iden ASIGNACION Expr:e PUNTOYCOMA ;
    new InsAsig(iden.fila, iden.columna, new ExpIden(iden.fila, iden.columna, iden.lexema), e)); :};
 
 // Declaracion de funciones tipo void
-Dec_Void ::= FUN VOID IDEN PABRE Lista_Argumentos_Vac PCIERRA LLABRE Bloque LLCIERRA ;
+Dec_Void ::= FUN VOID IDEN:iden PABRE Lista_Argumentos_Vac:list_args PCIERRA LLABRE Bloque:b LLCIERRA ;
+   {: RESULT = new DecFunVoid(iden.fila, iden.columna, iden.lexema, new TypeFunVoid(list_args), list_args, b); :};
 Dec_Void ::= FUN VOID error LLCIERRA:l
    {: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Declaracion de funcion incorrecta."); :};
 
