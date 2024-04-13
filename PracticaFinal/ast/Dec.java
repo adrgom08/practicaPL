@@ -14,13 +14,25 @@ public abstract class Dec implements ASTNode {
         this.id = id;
     }
 
-    public Type getTipo() { 
-    	return tipo;
+    public Type getTipo() {
+        return tipo;
     }
-    public KindDec getKindDec(){return tipoDec;}
-    public String getId() {return id;}
-    public int getFila(){ return fila; }
-    public int getColumna(){ return columna; }
+
+    public KindDec getKindDec() {
+        return tipoDec;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public int getFila() {
+        return fila;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
 
     public NodeKind nodeKind() {
         return NodeKind.DECLARATION;

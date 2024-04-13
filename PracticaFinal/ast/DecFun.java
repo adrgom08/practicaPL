@@ -22,10 +22,10 @@ public class DecFun extends Dec {
 
 	public String toString() {
 		StringBuilder str = new StringBuilder("fun ");
-        str.append(returnType.toString());
-        str.append(' ');
+		str.append(returnType.toString());
+		str.append(' ');
 		str.append(id);
-		str.append(' (');
+		str.append(" (");
 		for (Dec dec : args) {
 			str.append(dec.toString());
 			str.append(", ");
