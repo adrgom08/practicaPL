@@ -15,13 +15,14 @@ public class TypeFunVoid extends Type {
     }
 
     public String toString() {
-        StringBuilder str = new StringBuilder('(');
+        StringBuilder str = new StringBuilder("");
         for (Dec dec : listaArgs) {
             str.append(dec.getTipo().toString());
-            str.append(", ");
+            str.append(" x ");
         }
-        str.delete(str.length() - 2, str.length());
-        str.append(')');
+        str.delete(str.length() - 3, str.length());
+        str.append(" -> emptySet");
+        str.append('\n');
         return str.toString();
     }
 }

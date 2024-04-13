@@ -6,7 +6,6 @@ public class DecFunVoid extends Dec {
     private ArrayList<Dec> args;
     private Ins bloque;
     private String id;
-    private int maxSize;
 
     public DecFunVoid(int fila, int columna, String id, Type tipo, ArrayList<Dec> args, Ins bloque) {
         super(fila, columna, tipo, id);

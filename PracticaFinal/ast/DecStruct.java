@@ -1,7 +1,6 @@
 package ast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class DecStruct extends Dec {
     private ArrayList<Dec> listaDs;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Program implements ASTNode {
     private ArrayList<Dec> decs;
-    // private ArrayList<Ins> instrs;
+    private DecMain main;
     private int fila;
     private int columna;
 
@@ -16,11 +16,11 @@ public class Program implements ASTNode {
         return columna;
     }
 
-    public Program(ArrayList<Dec> decs) {
+    public Program(int fila, int columna, ArrayList<Dec> decs, DecMain main) {
+        this.fila = fila;
+        this.columna = columna;
         this.decs = decs;
-
-        // INSTRUCCIONES
-        // ...
+        this.main = main;
     }
 
     public NodeKind nodeKind() {
@@ -29,11 +29,11 @@ public class Program implements ASTNode {
 
     public String toString() {
         StringBuilder str = new StringBuilder();
-        for (Dec d : decs) {
-            str.append(d.toString());
+        for (Dec dec : ds) {
+            str.append(dec.toString());
             str.append('\n');
         }
-        // ...
+        str.append(main.toString());
         return str.toString();
     }
 

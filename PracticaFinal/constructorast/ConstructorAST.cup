@@ -7,7 +7,6 @@ import alex.TokenValue;
 import errors.GestionErroresTiny;
 import ast.*;
 import java.util.*;
-import javafx.util.*; 
 
 scan with {: return getScanner().next_token(); :};
 parser code {: 
@@ -38,10 +37,11 @@ non terminal  Programa, Lista_Instrucciones_Vac, Lista_Instrucciones, Instruccio
                 CuerpoStruct, Lista_Declaraciones_Vac, Lista_Declaraciones, Declaracion, Declaraciones_Ini_Vac,
                 Declaraciones_Ini, Inicial, Main;
 
-Programa ::= Declaraciones_Ini_Vac Main ;
+Programa ::= Declaraciones_Ini_Vac:decs Main:m ;
+   {: RESULT = new Program(m.fila(), m.columna(), decs, m); :};
 
 Main ::= MAIN LLABRE Bloque:b LLCIERRA ; // Gestionamos el main como una funcion void sin argumentos
-   {: RESULT = new DecFunVoid(b.fila(), b.columna(), "main", new TypeFunVoid(new ArrayList<Dec> ()), new ArrayList<Dec> (), b); :};
+   {: RESULT = new DecMain(b.fila(), b.columna(), "main", new TypeFunVoid(new ArrayList<Dec> ()), new ArrayList<Dec> (), b); :};
 Main ::= MAIN error LLCIERRA:l
    {: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Declaracion de main incorrecta."); :};
 
