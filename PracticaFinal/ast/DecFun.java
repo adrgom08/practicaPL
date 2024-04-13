@@ -9,10 +9,9 @@ public class DecFun extends Dec {
 	private Exp e;
 	private String id;
 
-	public DecFun(int fila, int columna, String id, Type returnType, ArrayList<Dec> args, Ins bloque, Exp e) {
-		this.fila = fila;
-		this.columna = columna;
-		this.id = id;
+	public DecFun(int fila, int columna, String id, Type tipo, Type returnType, ArrayList<Dec> args, Ins bloque,
+			Exp e) {
+		super(fila, columna, tipo, id);
 		this.tipoDec = KindDec.FUNCION;
 		this.returnType = returnType;
 		this.args = args;
@@ -25,7 +24,7 @@ public class DecFun extends Dec {
 		str.append(returnType.toString());
 		str.append(' ');
 		str.append(id);
-		str.append(" (");
+		str.append('(');
 		for (Dec dec : args) {
 			str.append(dec.toString());
 			str.append(", ");
