@@ -6,14 +6,14 @@ import java.io.Reader;
 import alex.AnalizadorLexicoTiny;
 
 public class Main {
-   public static void main(String[] args) throws Exception {
-     Reader input = new InputStreamReader(new FileInputStream(args[0]));
-	 AnalizadorLexicoTiny alex = new AnalizadorLexicoTiny(input);
-	 AnalizadorSintacticoTiny asint = new AnalizadorSintacticoTiny(alex);
-	 try {
-	     asint.parse();
-	 } catch (Exception e) {
-	     System.out.println("Something went wrong with the parsing...");
-	 }
- }
-}   
+	public static void main(String[] args) throws Exception {
+		Reader input = new InputStreamReader(new FileInputStream(args[0]));
+		AnalizadorLexicoTiny alex = new AnalizadorLexicoTiny(input);
+		ConstructorASTExp constructorast = new ConstructorASTExp(alex);
+		try {
+			System.out.println(constructorast.parse().value);
+		} catch (Exception e) {
+			System.out.println("Something went wrong with the parsing...");
+		}
+	}
+}
