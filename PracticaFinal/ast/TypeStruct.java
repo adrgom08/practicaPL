@@ -3,7 +3,7 @@ package ast;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TypeStruct extends Tipo {
+public class TypeStruct extends Type {
     private ArrayList<Dec> listaDs;
     private HashMap<String, Dec> dicDs;
 
@@ -12,7 +12,7 @@ public class TypeStruct extends Tipo {
         this.listaDs = listaDs;
         this.dicDs = new HashMap<String, Dec>();
         for (Dec dec : listaDs)
-            dicDs.put(dec.getIden(), dec);
+            dicDs.put(dec.getId(), dec);
     }
 
     public String toString() {

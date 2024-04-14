@@ -7,13 +7,13 @@ public class DecStruct extends Dec {
 
     public DecStruct(int fila, int columna, String id, Type tipo, ArrayList<Dec> listaDs) {
         super(fila, columna, tipo, id);
-        this.decTipo = KindDec.STRUCT;
+        this.tipoDec = KindDec.STRUCT;
         this.listaDs = listaDs;
     }
 
     public String toString() {
         StringBuilder str = new StringBuilder("stalinTruct ");
-        str.append(iden);
+        str.append(id);
         str.append(" {\n");
         for (Dec dec : listaDs) {
             str.append(dec.toString());

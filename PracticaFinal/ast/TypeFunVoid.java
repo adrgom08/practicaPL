@@ -1,6 +1,7 @@
 package ast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TypeFunVoid extends Type {
     private ArrayList<Dec> listaArgs;
@@ -11,7 +12,7 @@ public class TypeFunVoid extends Type {
         this.listaArgs = listaArgs;
         this.dicArgs = new HashMap<String, Dec>();
         for (Dec dec : listaArgs)
-            dicArgs.put(dec.getIden(), dec);
+            dicArgs.put(dec.getId(), dec);
     }
 
     public String toString() {

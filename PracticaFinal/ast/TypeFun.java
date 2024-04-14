@@ -1,8 +1,12 @@
 package ast;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class TypeFun extends Type {
     private ArrayList<Dec> listaArgs;
     private HashMap<String, Dec> dicArgs;
+    private Type tipo;
 
     public TypeFun(Type tipo, ArrayList<Dec> listaArgs) {
         this.tipoType = KindType.FUN;
@@ -10,7 +14,7 @@ public class TypeFun extends Type {
         this.listaArgs = listaArgs;
         this.dicArgs = new HashMap<String, Dec>();
         for (Dec dec : listaArgs)
-            dicArgs.put(dec.getIden(), dec);
+            dicArgs.put(dec.getId(), dec);
     }
 
     public String toString() {

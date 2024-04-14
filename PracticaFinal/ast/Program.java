@@ -29,7 +29,7 @@ public class Program implements ASTNode {
 
     public String toString() {
         StringBuilder str = new StringBuilder();
-        for (Dec dec : ds) {
+        for (Dec dec : decs) {
             str.append(dec.toString());
             str.append('\n');
         }
