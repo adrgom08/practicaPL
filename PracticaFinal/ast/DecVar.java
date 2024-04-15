@@ -7,6 +7,6 @@ public class DecVar extends Dec {
 	}
 
 	public String toString() {
-		return "var " + tipo.toString() + id.toString() + ";";
+		return "var " + tipo.toString() + " " + id.toString() + ";";
 	}
 }

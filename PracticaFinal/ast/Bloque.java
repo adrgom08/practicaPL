@@ -15,10 +15,12 @@ public class Bloque extends Ins {
 	public String toString() {
 		StringBuilder str = new StringBuilder("");
 		for (Dec d : decs) {
+			str.append("  ");
 			str.append(d.toString());
 			str.append('\n');
 		}
 		for (Ins i : ins) {
+			str.append("  ");
 			str.append(i.toString());
 			str.append('\n');
 		}

@@ -19,11 +19,11 @@ public class InsFor extends Ins {
 	public String toString() {
 		StringBuilder str = new StringBuilder("forLetariat ( ");
 		str.append(dec.toString());
-		str.append(";");
+		str.append(" ");
 		str.append(e.toString());
-		str.append(";");
+		str.append("; ");
 		str.append(asig.toString());
-		str.append(") ");
+		str.append(" ) ");
 		str.append("{\n");
 		str.append(bloque.toString());
 		str.append("\n}");

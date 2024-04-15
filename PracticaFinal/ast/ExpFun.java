@@ -20,9 +20,10 @@ public class ExpFun extends Exp {
         str.append('(');
         for (Exp e : params) {
             str.append(e.toString());
+            str.append(", ");
         }
-        str.deleteCharAt(str.length() - 1);
-        str.append(")\n");
+        str.delete(str.length() - 2, str.length());
+        str.append(")");
 
         return str.toString();
     }

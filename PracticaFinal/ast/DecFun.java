@@ -7,7 +7,6 @@ public class DecFun extends Dec {
 	private ArrayList<Dec> args;
 	private Ins bloque;
 	private Exp e;
-	private String id;
 
 	public DecFun(int fila, int columna, String id, Type tipo, Type returnType, ArrayList<Dec> args, Ins bloque,
 			Exp e) {
@@ -33,7 +32,7 @@ public class DecFun extends Dec {
 		str.append(") ");
 		str.append("{\n");
 		str.append(bloque.toString());
-		str.append("return ");
+		str.append("  return ");
 		str.append(e.toString());
 		str.append(";\n");
 		str.append("\n}");

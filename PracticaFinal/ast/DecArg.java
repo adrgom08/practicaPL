@@ -8,8 +8,8 @@ public class DecArg extends DecVar {
 
 	public String toString() {
 		if (tipo.getKindType() == KindType.REF)
-			return tipo.toString() + "# " + id.toString();
+			return tipo.toString() + " #" + id.toString();
 		else
-			return tipo.toString() + id.toString();
+			return tipo.toString() + ' ' + id.toString();
 	}
 }

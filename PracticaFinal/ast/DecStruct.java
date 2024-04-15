@@ -16,6 +16,7 @@ public class DecStruct extends Dec {
         str.append(id);
         str.append(" {\n");
         for (Dec dec : listaDs) {
+            str.append("  ");
             str.append(dec.toString());
             str.append('\n');
         }

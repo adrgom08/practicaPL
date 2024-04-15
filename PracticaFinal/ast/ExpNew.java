@@ -1,16 +1,16 @@
 package ast;
 
 public class ExpNew extends Exp {
-	private Type tipoReserva;
+	private Type tipoRes;
 
-	public ExpNew(int fila, int columna, Type tipoReserva) {
+	public ExpNew(int fila, int columna, Type tipoRes) {
 		this.fila = fila;
 		this.columna = columna;
-		this.tipoReserva = tipoReserva;
+		this.tipoRes = tipoRes;
 		this.tipoExp = KindExp.NEW;
 	}
 
 	public String toString() {
-		return "new" + tipoReserva.toString();
+		return "new" + tipoRes.toString();
 	}
 }

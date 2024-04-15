@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class DecFunVoid extends Dec {
     protected ArrayList<Dec> args;
     protected Ins bloque;
-    protected String id;
 
     public DecFunVoid(int fila, int columna, String id, Type tipo, ArrayList<Dec> args, Ins bloque) {
         super(fila, columna, tipo, id);

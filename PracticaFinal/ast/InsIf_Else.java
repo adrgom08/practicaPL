@@ -15,7 +15,7 @@ public class InsIf_Else extends Ins {
 	}
 
 	public String toString() {
-		StringBuilder str = new StringBuilder("trotskif (");
+		StringBuilder str = new StringBuilder("trotskIf (");
 		str.append(e.toString());
 		str.append(") ");
 		str.append("{\n");

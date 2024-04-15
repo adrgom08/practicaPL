@@ -30,22 +30,23 @@ terminal  TokenValue VAR, BOOL, ENTPOS, GUEVARRAY, POINTER, STALINTRUCT, MAIN, L
                       DISTINTO, TYPE, VOID;
 
 non terminal Program Programa;
-// non terminal Declaraciones_Ini_Vac Declaraciones;
-non terminal ArrayList<Dec> Declaraciones;
+non terminal ArrayList<Dec> Lista_Declaraciones_Vac, Lista_Declaraciones, Declaraciones_Ini_Vac, 
+                            Declaraciones_Ini, Lista_Argumentos_Vac, Lista_Argumentos, CuerpoStruct;
+non terminal ArrayList<Ins> Lista_Instrucciones, Lista_Instrucciones_Vac;
+non terminal ArrayList<Exp> Lista_Param_Vac, Lista_Param;
 non terminal DecMain Main;
-non terminal  Lista_Instrucciones_Vac, Lista_Instrucciones, Instruccion, 
-                InsAsig, InsIf, InsIfElse, InsWhile, InsFor, InsWrite, 
-                InsDelete, InsCall, Expr, E0, E1, E2, E3, E4, E5, E6, E7, E8,
-                Lista_Param_Vac, Lista_Param,  Bloque, T0, T1, T2, Dec_Var, Dec_Var_Vacia, Dec_Var_Ini,
-                Dec_Fun, Dec_Void, Lista_Argumentos_Vac, Lista_Argumentos, Argumento, Dec_Tipo, Dec_Struct,
-                CuerpoStruct, Lista_Declaraciones_Vac, Lista_Declaraciones, Declaracion,
-                Declaraciones_Ini, Inicial;
+non terminal Ins Bloque, Instruccion, InsAsig, InsIf, InsIfElse, InsWhile, InsFor, InsWrite, InsDelete, InsCall;
+non terminal Exp Expr, E0, E1, E2, E3, E4, E5, E6, E7, E8;
+non terminal Type T0, T1, T2;
+non terminal Dec Declaracion, Inicial, Dec_Var, Dec_Var_Vacia, Dec_Var_Ini, Dec_Fun,
+                 Dec_Void, Dec_Tipo, Dec_Struct, Argumento;
 
-Programa ::= Declaraciones:decs Main:m
-   {: RESULT = new Program(m.fila, m.columna, decs, m); :};
+
+Programa ::= Declaraciones_Ini_Vac:decs Main:m 
+   {: RESULT = new Program(m.getFila(), m.getColumna(), decs, m); :};
 
 Main ::= MAIN LLABRE Bloque:b LLCIERRA  // Gestionamos el main como una funcion void sin argumentos
-   {: RESULT = new DecMain(b.fila(), b.columna(), "main", new TypeFunVoid(new ArrayList<Dec> ()), new ArrayList<Dec> (), b); :};
+   {: RESULT = new DecMain(b.getFila(), b.getColumna(), "main", new TypeFunVoid(new ArrayList<Dec> ()), new ArrayList<Dec> (), b); :};
 Main ::= MAIN error LLCIERRA:l
    {: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Declaracion de main incorrecta."); :};
 
@@ -115,7 +116,7 @@ T0 ::= POINTER T0:t0
 T0 ::= T1:t1
     {: RESULT = t1; :};
 T1 ::= GUEVARRAY T1:t1 CABRE Expr:e CCIERRA
-   {: RESULT = new TypeArray(t1.fila(), t1.columna(), t1, e); :};
+   {: RESULT = new TypeArray(t1, e); :};
 T1 ::= PABRE T0:t0 PCIERRA
     {: RESULT = t0; :};
 T1 ::= IDEN:iden
@@ -135,12 +136,12 @@ Dec_Var ::= Dec_Var_Ini:d
 Dec_Var ::= VAR error PUNTOYCOMA:p
    {: System.out.println("FILA " + p.fila + ", COLUMNA " + p.columna + ": Declaracion de variable incorrecta."); :};
 Dec_Var_Vacia ::= VAR T0:t0 IDEN:iden PUNTOYCOMA
-   {: RESULT = new DecVar(t0.fila(), t0.columna(), iden.lexema, t0); :};
+   {: RESULT = new DecVar(t0.getFila(), t0.getColumna(), iden.lexema, t0); :};
 Dec_Var_Ini ::= VAR T0:t0 IDEN:iden ASIGNACION Expr:e PUNTOYCOMA
-   {: RESULT = new DecVarIni(t0.fila(), t0.columna(), iden.lexema, t0, 
+   {: RESULT = new DecVarIni(t0.getFila(), t0.getColumna(), iden.lexema, t0, 
    new InsAsig(iden.fila, iden.columna, new ExpIden(iden.fila, iden.columna, iden.lexema), e)); :};
 Dec_Var_Ini ::= VAR CONST T0:t0 IDEN:iden ASIGNACION Expr:e PUNTOYCOMA
-   {: RESULT = new DecVarConst(t0.fila(), t0.columna(), iden.lexema, t0, 
+   {: RESULT = new DecVarConst(t0.getFila(), t0.getColumna(), iden.lexema, t0, 
    new InsAsig(iden.fila, iden.columna, new ExpIden(iden.fila, iden.columna, iden.lexema), e)); :};
 
 // Declaracion de funciones tipo void
@@ -151,7 +152,7 @@ Dec_Void ::= FUN VOID error LLCIERRA:l
 
 // Declaracion de funciones 
 Dec_Fun ::= FUN T0:t0 IDEN:iden PABRE Lista_Argumentos_Vac:list_args PCIERRA LLABRE Bloque:b RETURN Expr:e PUNTOYCOMA LLCIERRA
-   {: RESULT = new DecFun(t0.fila(), t0.columna(), iden.lexema, new TypeFun(t0, list_args), t0, list_args, b, e); :};
+   {: RESULT = new DecFun(t0.getFila(), t0.getColumna(), iden.lexema, new TypeFun(t0, list_args), t0, list_args, b, e); :};
 Dec_Fun ::= FUN error LLCIERRA:l 
    {: System.out.println("FILA " + l.fila + ", COLUMNA " + l.columna + ": Declaracion de funcion incorrecta."); :};
 
@@ -162,11 +163,11 @@ Lista_Argumentos_Vac ::=
 Lista_Argumentos ::= Lista_Argumentos:list_args COMA Argumento:arg
    {: list_args.add(arg); RESULT = list_args; :};
 Lista_Argumentos ::= Argumento:arg
-   {: ArrayList<Dec> list_args (); list_args.add(arg); RESULT = list_args; :};
+   {: ArrayList<Dec> list_args = new ArrayList<Dec> (); list_args.add(arg); RESULT = list_args; :};
 Argumento ::= T0:t0 IDEN:iden
-   {: RESULT = new DecArg(t0.fila(), t0.columna(), iden.lexema, t0); :};
+   {: RESULT = new DecArg(t0.getFila(), t0.getColumna(), iden.lexema, t0); :};
 Argumento ::= T0:t0 REF IDEN:iden
-   {: RESULT = new DecArg(t0.fila(), t0.columna(), iden.lexema, new TypeRef(t0)); :};
+   {: RESULT = new DecArg(t0.getFila(), t0.getColumna(), iden.lexema, new TypeRef(t0)); :};
 
 
 // Instrucciones
@@ -281,21 +282,21 @@ E5 ::= REF E6:e6
 E5 ::= E6:e6
    {: RESULT = e6; :};
 
-E6 ::= NEW:n T0:tipo
-   {: RESULT = new ExpNew(n.getFila(), n.getColumna(), tipo); :};
-E6 ::= RED:r T0:tipo
-   {: RESULT = new ExpRead(r.getFila(), r.getColumna(), tipo); :};
+E6 ::= NEW:n T0:t0
+   {: RESULT = new ExpNew(n.fila, n.columna, t0); :};
+E6 ::= RED:r T0:t0
+   {: RESULT = new ExpRead(r.fila, r.columna, t0); :};
 E6 ::= E7:e7
    {: RESULT = e7; :};
 
 E7 ::= E7:e7 CABRE Expr:expr CCIERRA
-   {: RESULT = new ExpCorchete(e7.getFila(), e7.getColumna(), e7, expr) :};
+   {: RESULT = new ExpCorchete(e7.getFila(), e7.getColumna(), e7, expr); :};
 E7 ::= E7:e7 PUNTO IDEN:iden
-   {: RESULT = new ExpPunto(e7.getFila(), e7.getColumna(), e7, iden.lexema) :};
+   {: RESULT = new ExpPunto(e7.getFila(), e7.getColumna(), e7, iden.lexema); :};
 E7 ::= E7:e7 FLECHA IDEN:iden
    {: RESULT = new ExpFlecha(e7.getFila(), e7.getColumna(), e7, iden.lexema);  :};
 E7 ::= E7:e7 PABRE Lista_Param_Vac:params PCIERRA
-   {: RESULT = new ExpFun(e7.getFila(), e7.getColumna(), e7, params) :};
+   {: RESULT = new ExpFun(e7.getFila(), e7.getColumna(), e7, params); :};
 
 E7 ::= E8:e8 
    {: RESULT = e8; :};
